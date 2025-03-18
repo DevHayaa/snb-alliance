@@ -1,6 +1,8 @@
+'use client'
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar, Clock, MapPin, Users, CheckCircle, FileText, HelpCircle, Mail, CalendarDays } from "lucide-react"
+import { useState } from "react"
 
 // Sample upcoming events data
 const upcomingEvents = [
@@ -213,6 +215,27 @@ const upcomingEvents = [
 ]
 
 export default function EventsCalendarPage() {
+
+  interface Event {
+    id: number;
+    title: string;
+    date: string;
+    time: string;
+    location: string;
+    type: string;
+    description: string;
+  }
+
+  const [visibleEvents, setVisibleEvents] = useState(5);
+
+  const UpcomingEvents = ({ upcomingEvents }: { upcomingEvents: Event[] }) => {
+    const [visibleEvents, setVisibleEvents] = useState(5);
+  }
+  
+  // Define loadMoreEvents function
+  const loadMoreEvents = () => {
+    setVisibleEvents((prev) => prev + 5); // Increase visible events by 5
+  };
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -240,62 +263,76 @@ export default function EventsCalendarPage() {
         </div>
       </section>
       {/* Upcoming Events Calendar Section */}
-      <section className="py-16 bg-gray-50" id="upcoming-events">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 text-gray-800">Upcoming Events</h2>
-              <p className="text-lg text-gray-600">
-                Browse our calendar of upcoming workshops, webinars, and training sessions
-              </p>
-            </div>
+    <section className="py-16 bg-gray-50" id="upcoming-events">
+      <div className="container mx-auto px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">Upcoming Events</h2>
+            <p className="text-lg text-gray-600">
+              Browse our calendar of upcoming workshops, webinars, and training sessions.
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 gap-6 mb-8">
-              {upcomingEvents.map((event) => (
-                <div
-                  key={event.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex flex-col md:flex-row">
-                    <div
-                      className={`w-full md:w-1/4 p-6 flex flex-col justify-center items-center text-white ${
-                        event.type === "Workshop" ? "bg-[#39a3b1]" : "bg-[#f0932a]"
-                      }`}
-                    >
-                      <span className="text-sm font-semibold uppercase tracking-wider mb-2">{event.type}</span>
-                      <Calendar className="h-10 w-10 mb-2" />
-                      <div className="text-center">
-                        <div className="font-bold">{event.date}</div>
-                        <div className="text-sm">{event.time}</div>
-                      </div>
-                    </div>
-                    <div className="w-full md:w-3/4 p-6">
-                      <h3 className="text-xl font-bold mb-2 text-gray-800">{event.title}</h3>
-                      <p className="text-gray-600 mb-4">{event.description}</p>
-                      <div className="flex flex-wrap items-center text-sm text-gray-500 mb-4">
-                        <div className="flex items-center mr-4 mb-2">
-                          <Clock className="h-4 w-4 mr-1" />
-                          <span>{event.time}</span>
-                        </div>
-                        <div className="flex items-center mb-2">
-                          <MapPin className="h-4 w-4 mr-1" />
-                          <span>{event.location}</span>
-                        </div>
-                      </div>
-                      <Link
-                        href={`/contact`}
-                        className="inline-flex items-center px-4 py-2 bg-[#39a3b1] text-white rounded-md hover:bg-teal-600 transition-colors"
-                      >
-                        Register Now
-                      </Link>
+          <div className="grid grid-cols-1 gap-6 mb-8">
+            {upcomingEvents.slice(0, visibleEvents).map((event) => (
+              <div
+                key={event.id}
+                className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow"
+              >
+                <div className="flex flex-col md:flex-row">
+                  <div
+                    className={`w-full md:w-1/4 p-6 flex flex-col justify-center items-center text-white ${
+                      event.type === "Workshop" ? "bg-[#39a3b1]" : "bg-[#f0932a]"
+                    }`}
+                  >
+                    <span className="text-sm font-semibold uppercase tracking-wider mb-2">{event.type}</span>
+                    <Calendar className="h-10 w-10 mb-2" />
+                    <div className="text-center">
+                      <div className="font-bold">{event.date}</div>
+                      <div className="text-sm">{event.time}</div>
                     </div>
                   </div>
+                  <div className="w-full md:w-3/4 p-6">
+                    <h3 className="text-xl font-bold mb-2 text-gray-800">{event.title}</h3>
+                    <p className="text-gray-600 mb-4">{event.description}</p>
+                    <div className="flex flex-wrap items-center text-sm text-gray-500 mb-4">
+                      <div className="flex items-center mr-4 mb-2">
+                        <Clock className="h-4 w-4 mr-1" />
+                        <span>{event.time}</span>
+                      </div>
+                      <div className="flex items-center mb-2">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        <span>{event.location}</span>
+                      </div>
+                    </div>
+                    <Link
+                      href={`/contact`}
+                      className="inline-flex items-center px-4 py-2 bg-[#39a3b1] text-white rounded-md hover:bg-teal-600 transition-colors"
+                    >
+                      Register Now
+                    </Link>
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
+
+          {/* Load More Button */}
+          {visibleEvents < upcomingEvents.length && (
+            <div className="text-center mt-6">
+              <button
+                onClick={loadMoreEvents}
+                className="px-6 py-3 bg-[#39a3b1] text-white rounded-md hover:bg-teal-600 transition"
+              >
+                See More
+              </button>
+            </div>
+          )}
         </div>
-      </section>
+      </div>
+    </section>
+
+
 
       {/* Workshops & Webinars Section */}
       <section className="py-16 bg-white" id="workshops-webinars">
