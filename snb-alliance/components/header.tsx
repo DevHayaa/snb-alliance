@@ -40,13 +40,13 @@ import {
   Layout,
   LightbulbIcon,
   HandshakeIcon,
+  X,
+  Menu,
 } from "lucide-react"
 
 // Import the useAuth hook at the top of the file
 import { useAuth } from "@/contexts/auth-context"
-
-// Update the navItems array to ensure all links are properly connected to their related content
-// Make sure each item has the correct href that points to the appropriate page or section
+import { usePathname } from "next/navigation"
 
 // For the navItems array, update each item's href to point to the correct page
 const navItems = [
@@ -287,8 +287,6 @@ const navItems = [
 ]
 
 // Update the megaMenuContent object to have separate overview links at the top of each dropdown
-
-// Replace the existing megaMenuContent object with this updated version:
 const megaMenuContent = {
   Certifications: {
     overview: { title: "Certifications Overview", href: "/certifications", icon: "Award" },
@@ -309,16 +307,12 @@ const megaMenuContent = {
         items: [
           { title: "Certification Process", href: "/certifications#certification-process", icon: "GitBranch" },
           { title: "Exam & Fees", href: "/certifications#exam-fees", icon: "FileText" },
-          // { title: "Preparation Resources", href: "/certifications/preparation", icon: "BookOpen" },
-          // { title: "Recertification", href: "/certifications/recertification", icon: "RefreshCw" },
         ],
       },
       {
         title: "Resources",
         href: "/resources/certification",
         items: [
-          // { title: "Study Materials", href: "/resources/study-materials", icon: "Book" },
-          // { title: "Practice Exams", href: "/resources/practice-exams", icon: "FileQuestion" },
           { title: "Certification FAQ", href: "/resources#certification-faq", icon: "HelpCircle" },
           { title: "Success Stories", href: "/learning#testimonials", icon: "Star" },
         ],
@@ -371,8 +365,16 @@ const megaMenuContent = {
           { title: "Industry Insights & Reports", href: "/resources/industryBestPractice#insights", icon: "BarChart" },
           { title: "Market Trends", href: "/resources/industryBestPractice#market-trends", icon: "TrendingUp" },
           { title: "Expert Opinions", href: "/resources/industryBestPractice#expert-opinions", icon: "MessageSquare" },
-          { title: "Best Practices & Guidelines", href: "/resources/industryBestPractice#best-practices", icon: "CheckSquare" },
-          { title: "Compliance Checklists", href: "/resources/industryBestPractice#compliance-checklists", icon: "ClipboardCheck" },
+          {
+            title: "Best Practices & Guidelines",
+            href: "/resources/industryBestPractice#best-practices",
+            icon: "CheckSquare",
+          },
+          {
+            title: "Compliance Checklists",
+            href: "/resources/industryBestPractice#compliance-checklists",
+            icon: "ClipboardCheck",
+          },
         ],
       },
       {
@@ -392,7 +394,11 @@ const megaMenuContent = {
         items: [
           { title: "Blog & Articles", href: "/resources/learningCommunity#blog-articles", icon: "BookOpen" },
           { title: "FAQs", href: "/resources/learningCommunity#faqs", icon: "HelpCircle" },
-          { title: "Community & Networking", href: "/resources//learningCommunity#community-networking", icon: "Users" },
+          {
+            title: "Community & Networking",
+            href: "/resources//learningCommunity#community-networking",
+            icon: "Users",
+          },
           { title: "Upcoming Events", href: "/resources//learningCommunity#upcoming-events", icon: "Calendar" },
           { title: "Discussion Forums", href: "/resources/learningCommunity#discussion-forums", icon: "MessageCircle" },
         ],
@@ -427,7 +433,6 @@ const megaMenuContent = {
         items: [
           { title: "Latest News", href: "/about#news", icon: "FileText" },
           { title: "Contact Us", href: "/about#contact", icon: "Mail" },
-          // { title: "Support", href: "/support", icon: "HelpCircle" },
         ],
       },
     ],
@@ -469,18 +474,60 @@ const megaMenuContent = {
   },
 }
 
-// Inside the Header component, add the useAuth hook
+// Icon mapping function
+const getIconComponent = (iconName: string) => {
+  const iconMap: Record<string, any> = {
+    Award,
+    GraduationCap,
+    ClipboardCheck,
+    Users,
+    Trophy,
+    GitBranch,
+    FileText,
+    BookOpen,
+    RefreshCw,
+    Book,
+    HelpCircle,
+    Star,
+    FileQuestion,
+    User,
+    UserPlus,
+    Laptop,
+    Briefcase,
+    Video,
+    Calendar,
+    Mail,
+    Shield,
+    Settings,
+    BarChart,
+    TrendingUp,
+    MessageSquare,
+    File,
+    Cpu,
+    Globe,
+    MessageCircle,
+    CheckSquare,
+    CreditCard,
+    LogIn,
+    Layout,
+    LightbulbIcon,
+    HandshakeIcon,
+  }
+  return iconMap[iconName] || null
+}
+
 export default function Header() {
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [openMobileDropdowns, setOpenMobileDropdowns] = useState<Record<string, boolean>>({})
+  const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null)
+  const [activeMobileSubmenu, setActiveMobileSubmenu] = useState<string | null>(null)
   const headerRef = useRef<HTMLDivElement>(null)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
   const { user, logout } = useAuth()
-
-  // First, add the language state and toggle functionality at the top of the Header component
-  // Add this after the existing useState declarations
+  const pathname = usePathname()
 
   const [currentLanguage, setCurrentLanguage] = useState<"en" | "ar" | "fr">("en")
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
 
   const languages = [
     { code: "en", name: "English", flag: "🇺🇸" },
@@ -490,26 +537,47 @@ export default function Header() {
 
   const handleLanguageChange = (langCode: "en" | "ar" | "fr") => {
     setCurrentLanguage(langCode)
+    setIsLanguageMenuOpen(false)
     // Here you would implement actual language change functionality
-    // This could involve i18n library calls or context updates
   }
 
   const toggleMegaMenu = (title: string) => {
     setActiveMegaMenu(activeMegaMenu === title ? null : title)
   }
 
-  const toggleMobileDropdown = (title: string) => {
-    setOpenMobileDropdowns((prev) => ({
-      ...prev,
-      [title]: !prev[title],
-    }))
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+    if (isMobileMenuOpen) {
+      setActiveMobileMenu(null)
+      setActiveMobileSubmenu(null)
+    }
   }
 
-  // Close mega menu when clicking outside
+  const handleMobileMenuClick = (title: string) => {
+    setActiveMobileMenu(activeMobileMenu === title ? null : title)
+    setActiveMobileSubmenu(null)
+  }
+
+  const handleMobileSubmenuClick = (title: string) => {
+    setActiveMobileSubmenu(activeMobileSubmenu === title ? null : title)
+  }
+
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
         setActiveMegaMenu(null)
+        setIsLanguageMenuOpen(false)
+      }
+
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        !headerRef.current?.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false)
+        setActiveMobileMenu(null)
+        setActiveMobileSubmenu(null)
       }
     }
 
@@ -518,6 +586,14 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+    setActiveMobileMenu(null)
+    setActiveMobileSubmenu(null)
+    setActiveMegaMenu(null)
+  }, [pathname])
 
   // Handle smooth scrolling for anchor links
   useEffect(() => {
@@ -540,6 +616,8 @@ export default function Header() {
           // Close menus
           setActiveMegaMenu(null)
           setIsMobileMenuOpen(false)
+          setActiveMobileMenu(null)
+          setActiveMobileSubmenu(null)
         }
       }
     }
@@ -550,11 +628,24 @@ export default function Header() {
     }
   }, [])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [isMobileMenuOpen])
+
   return (
     <header ref={headerRef} className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4">
         {/* Main Navigation */}
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="flex items-center gap-2">
@@ -570,11 +661,11 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <div key={item.title} className="relative">
                 <button
-                  className={`flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                     activeMegaMenu === item.title
                       ? "text-[#39a3b1] bg-gray-50"
                       : "text-gray-700 hover:text-[#39a3b1] hover:bg-gray-50"
@@ -593,21 +684,20 @@ export default function Header() {
           </nav>
 
           {/* Right Side Actions */}
-          {/* Update the Right Side Actions section to show different options when logged in */}
-          {/* Replace the existing Right Side Actions div with this: */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 md:space-x-3">
             {/* Language Selector - Desktop */}
             <div className="hidden md:block relative">
               <button
-                className="flex items-center space-x-1 px-3 py-1.5 text-sm font-medium border border-gray-200 rounded-md hover:bg-gray-50"
-                onClick={() => setActiveMegaMenu(activeMegaMenu === "language" ? null : "language")}
+                className="flex items-center space-x-1 px-2 py-1.5 text-sm font-medium border border-gray-200 rounded-md hover:bg-gray-50"
+                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                aria-expanded={isLanguageMenuOpen}
               >
                 <span className="mr-1">{languages.find((lang) => lang.code === currentLanguage)?.flag}</span>
                 <span>{currentLanguage.toUpperCase()}</span>
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className={`h-4 w-4 transition-transform ${isLanguageMenuOpen ? "rotate-180" : ""}`} />
               </button>
 
-              {activeMegaMenu === "language" && (
+              {isLanguageMenuOpen && (
                 <div className="absolute right-0 mt-1 w-40 bg-white rounded-md shadow-lg z-50 border border-gray-100">
                   <div className="py-1">
                     {languages.map((lang) => (
@@ -616,10 +706,7 @@ export default function Header() {
                         className={`flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-50 ${
                           currentLanguage === lang.code ? "bg-gray-50 text-[#39a3b1] font-medium" : "text-gray-700"
                         }`}
-                        onClick={() => {
-                          handleLanguageChange(lang.code as "en" | "ar" | "fr")
-                          setActiveMegaMenu(null)
-                        }}
+                        onClick={() => handleLanguageChange(lang.code as "en" | "ar" | "fr")}
                       >
                         <span className="mr-2">{lang.flag}</span>
                         <span>{lang.name}</span>
@@ -632,22 +719,22 @@ export default function Header() {
 
             <Link
               href="/contact"
-              className="hidden md:inline-flex px-4 py-2 text-sm font-medium border border-gray-200 rounded-md "
+              className="hidden md:inline-flex px-3 py-2 text-sm font-medium border border-gray-200 rounded-md hover:bg-gray-50"
             >
               Contact Us
             </Link>
 
             {user ? (
-              <div className="hidden md:flex items-center space-x-3">
+              <div className="hidden md:flex items-center space-x-2">
                 <Link
                   href="/dashboard"
-                  className="px-4 py-2 text-sm font-medium border border-gray-200 rounded-md hover:bg-gray-50"
+                  className="px-3 py-2 text-sm font-medium border border-gray-200 rounded-md hover:bg-gray-50"
                 >
                   Dashboard
                 </Link>
                 <button
                   onClick={logout}
-                  className="px-4 py-2 text-sm font-medium bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
+                  className="px-3 py-2 text-sm font-medium bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
                 >
                   Sign Out
                 </button>
@@ -655,7 +742,7 @@ export default function Header() {
             ) : (
               <Link
                 href="/login"
-                className="hidden md:inline-flex px-4 py-2 text-sm font-medium bg-[#39a3b1] text-white rounded-md hover:bg-teal-dark transition-colors"
+                className="hidden md:inline-flex px-3 py-2 text-sm font-medium bg-[#39a3b1] text-white rounded-md hover:bg-[#39a3b1]/90 transition-colors"
               >
                 Sign In
               </Link>
@@ -663,75 +750,31 @@ export default function Header() {
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden rounded-md p-2 text-gray-700 hover:bg-gray-100 ml-2"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden rounded-md p-2 text-gray-700 hover:bg-gray-100"
+              onClick={toggleMobileMenu}
               aria-expanded={isMobileMenuOpen}
+              aria-label="Toggle menu"
             >
-              <span className="sr-only">Open main menu</span>
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {isMobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
-        {/* Mega Menu */}
+        {/* Mega Menu - Desktop */}
         {activeMegaMenu && megaMenuContent[activeMegaMenu as keyof typeof megaMenuContent] && (
-          <div className="absolute left-0 right-0 bg-white shadow-lg border-t border-gray-100 z-50 hidden md:block">
-            <div className="container mx-auto py-8 px-4">
+          <div className="absolute left-0 right-0 bg-white shadow-lg border-t border-gray-100 z-50 hidden lg:block">
+            <div className="container mx-auto py-6 px-4">
               {/* Overview Link */}
               {megaMenuContent[activeMegaMenu as keyof typeof megaMenuContent].overview && (
                 <div className="mb-6 pb-4 border-b border-gray-200">
                   <Link
                     href={megaMenuContent[activeMegaMenu as keyof typeof megaMenuContent].overview.href}
-                    className="inline-flex items-center px-4 py-2 bg-[#39a3b1] text-white rounded-md hover:bg-teal-600 transition-colors"
+                    className="inline-flex items-center px-4 py-2 bg-[#39a3b1] text-white rounded-md hover:bg-[#39a3b1]/90 transition-colors"
                     onClick={() => setActiveMegaMenu(null)}
                   >
                     {(() => {
-                      const IconComponent = megaMenuContent[activeMegaMenu as keyof typeof megaMenuContent].overview
-                        .icon
-                        ? {
-                            Award: Award,
-                            GraduationCap: GraduationCap,
-                            ClipboardCheck: ClipboardCheck,
-                            Users: Users,
-                            Trophy: Trophy,
-                            GitBranch: GitBranch,
-                            FileText: FileText,
-                            BookOpen: BookOpen,
-                            RefreshCw: RefreshCw,
-                            Book: Book,
-                            HelpCircle: HelpCircle,
-                            Star: Star,
-                            FileQuestion: FileQuestion,
-                            User: User,
-                            UserPlus: UserPlus,
-                            Laptop: Laptop,
-                            Briefcase: Briefcase,
-                            Video: Video,
-                            Calendar: Calendar,
-                            Mail: Mail,
-                            Shield: Shield,
-                            Settings: Settings,
-                            BarChart: BarChart,
-                            TrendingUp: TrendingUp,
-                            MessageSquare: MessageSquare,
-                            File: File,
-                            Cpu: Cpu,
-                            Globe: Globe,
-                            MessageCircle: MessageCircle,
-                            CheckSquare: CheckSquare,
-                            CreditCard: CreditCard,
-                            LogIn: LogIn,
-                            Layout: Layout,
-                            LightbulbIcon: LightbulbIcon,
-                            HandshakeIcon: HandshakeIcon,
-                          }[megaMenuContent[activeMegaMenu as keyof typeof megaMenuContent].overview.icon]
-                        : null
+                      const iconName = megaMenuContent[activeMegaMenu as keyof typeof megaMenuContent].overview.icon
+                      const IconComponent = getIconComponent(iconName)
                       return IconComponent ? <IconComponent className="h-4 w-4 mr-2 flex-shrink-0" /> : null
                     })()}
                     <span>{megaMenuContent[activeMegaMenu as keyof typeof megaMenuContent].overview.title}</span>
@@ -739,7 +782,7 @@ export default function Header() {
                 </div>
               )}
 
-              <div className="grid grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 {megaMenuContent[activeMegaMenu as keyof typeof megaMenuContent].columns.map((column, idx) => (
                   <div key={idx}>
                     <h3 className="text-base font-semibold text-teal-700 mb-4 border-b pb-2">
@@ -757,46 +800,7 @@ export default function Header() {
                     </h3>
                     <ul className="space-y-3">
                       {column.items.map((item, itemIdx) => {
-                        const IconComponent = item.icon
-                          ? {
-                              Award: Award,
-                              GraduationCap: GraduationCap,
-                              ClipboardCheck: ClipboardCheck,
-                              Users: Users,
-                              Trophy: Trophy,
-                              GitBranch: GitBranch,
-                              FileText: FileText,
-                              BookOpen: BookOpen,
-                              RefreshCw: RefreshCw,
-                              Book: Book,
-                              HelpCircle: HelpCircle,
-                              Star: Star,
-                              FileQuestion: FileQuestion,
-                              User: User,
-                              UserPlus: UserPlus,
-                              Laptop: Laptop,
-                              Briefcase: Briefcase,
-                              Video: Video,
-                              Calendar: Calendar,
-                              Mail: Mail,
-                              Shield: Shield,
-                              Settings: Settings,
-                              BarChart: BarChart,
-                              TrendingUp: TrendingUp,
-                              MessageSquare: MessageSquare,
-                              File: File,
-                              Cpu: Cpu,
-                              Globe: Globe,
-                              MessageCircle: MessageCircle,
-                              CheckSquare: CheckSquare,
-                              CreditCard: CreditCard,
-                              LogIn: LogIn,
-                              Layout: Layout,
-                              LightbulbIcon: LightbulbIcon,
-                              HandshakeIcon: HandshakeIcon,
-                            }[item.icon]
-                          : null
-
+                        const IconComponent = getIconComponent(item.icon)
                         return (
                           <li key={itemIdx}>
                             <Link
@@ -817,123 +821,160 @@ export default function Header() {
             </div>
           </div>
         )}
+      </div>
 
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-2">
-            <div className="space-y-1 px-2 pb-3 pt-2">
+      {/* Mobile Navigation Menu - Full Screen Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          ref={mobileMenuRef}
+          className="fixed inset-0 z-50 bg-white overflow-y-auto lg:hidden pt-16"
+          style={{ maxHeight: "100vh" }}
+        >
+          <div className="container mx-auto px-4 py-4">
+            {/* Main Navigation Items */}
+            <nav className="space-y-1">
               {navItems.map((item) => (
-                <div key={item.title} className="py-1">
-                  <div className="flex items-center justify-between">
-                    <Link
-                      href={item.href}
-                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#39a3b1] rounded-md"
-                      onClick={(e) => {
-                        if (item.items.length > 0) {
-                          e.preventDefault()
-                          toggleMobileDropdown(item.title)
-                        } else {
-                          setIsMobileMenuOpen(false)
-                        }
-                      }}
-                    >
-                      {item.title}
-                    </Link>
-                    {item.items.length > 0 && (
-                      <button onClick={() => toggleMobileDropdown(item.title)} className="px-3 py-2">
-                        <ChevronDown
-                          className={`h-5 w-5 text-gray-500 transition-transform duration-200 ${
-                            openMobileDropdowns[item.title] ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                    )}
-                  </div>
-                  {openMobileDropdowns[item.title] && (
-                    <div className="pl-4 space-y-1 mt-1">
-                      {item.items.map((subItem) => (
-                        <Link
-                          key={subItem.title}
-                          href={subItem.href}
-                          className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#39a3b1] rounded-md"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          {subItem.title}
-                        </Link>
+                <div key={item.title} className="border-b border-gray-100 last:border-b-0">
+                  <button
+                    className="flex items-center justify-between w-full py-3 px-2 text-left font-medium text-gray-800 hover:text-[#39a3b1]"
+                    onClick={() => handleMobileMenuClick(item.title)}
+                    aria-expanded={activeMobileMenu === item.title}
+                  >
+                    <span>{item.title}</span>
+                    <ChevronDown
+                      className={`h-5 w-5 text-gray-500 transition-transform duration-200 ${
+                        activeMobileMenu === item.title ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {activeMobileMenu === item.title && (
+                    <div className="py-2 px-2">
+                      {/* Overview Link */}
+                      {megaMenuContent[item.title as keyof typeof megaMenuContent]?.overview && (
+                        <div className="mb-4">
+                          <Link
+                            href={megaMenuContent[item.title as keyof typeof megaMenuContent].overview.href}
+                            className="inline-flex items-center px-4 py-2 bg-[#39a3b1] text-white rounded-md text-sm hover:bg-[#39a3b1]/90 transition-colors"
+                            onClick={toggleMobileMenu}
+                          >
+                            {(() => {
+                              const iconName = megaMenuContent[item.title as keyof typeof megaMenuContent].overview.icon
+                              const IconComponent = getIconComponent(iconName)
+                              return IconComponent ? <IconComponent className="h-4 w-4 mr-2 flex-shrink-0" /> : null
+                            })()}
+                            <span>{megaMenuContent[item.title as keyof typeof megaMenuContent].overview.title}</span>
+                          </Link>
+                        </div>
+                      )}
+
+                      {/* Column Headers */}
+                      {megaMenuContent[item.title as keyof typeof megaMenuContent]?.columns.map((column, idx) => (
+                        <div key={idx} className="mb-4">
+                          <button
+                            className="flex items-center justify-between w-full py-2 px-2 text-left font-medium text-gray-700 hover:text-[#39a3b1] border-b border-gray-100"
+                            onClick={() => handleMobileSubmenuClick(column.title)}
+                            aria-expanded={activeMobileSubmenu === column.title}
+                          >
+                            <span>{column.title}</span>
+                            <ChevronDown
+                              className={`h-4 w-4 text-gray-500 transition-transform duration-200 ${
+                                activeMobileSubmenu === column.title ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+
+                          {activeMobileSubmenu === column.title && (
+                            <ul className="pl-4 py-2 space-y-2">
+                              {column.items.map((subItem, subIdx) => {
+                                const IconComponent = getIconComponent(subItem.icon)
+                                return (
+                                  <li key={subIdx}>
+                                    <Link
+                                      href={subItem.href}
+                                      className="flex items-center py-1.5 text-gray-600 hover:text-[#39a3b1] text-sm"
+                                      onClick={toggleMobileMenu}
+                                    >
+                                      {IconComponent && <IconComponent className="h-4 w-4 mr-2 flex-shrink-0" />}
+                                      <span>{subItem.title}</span>
+                                    </Link>
+                                  </li>
+                                )
+                              })}
+                            </ul>
+                          )}
+                        </div>
                       ))}
                     </div>
                   )}
                 </div>
               ))}
-              {/* Also update the mobile navigation section to include authentication options */}
-              {/* Add this inside the mobile navigation section, right before the closing div: */}
-              <div className="px-2 py-3 border-t border-gray-200">
-                <div className="flex flex-col space-y-1">
-                  <p className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    Language / Langue / اللغة
-                  </p>
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      className={`flex items-center px-3 py-2 text-base font-medium rounded-md ${
-                        currentLanguage === lang.code
-                          ? "bg-gray-50 text-[#39a3b1]"
-                          : "text-gray-700 hover:bg-gray-50 hover:text-[#39a3b1]"
-                      }`}
-                      onClick={() => {
-                        handleLanguageChange(lang.code as "en" | "ar" | "fr")
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <span className="mr-2">{lang.flag}</span>
-                      <span>{lang.name}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="pt-4 pb-3 border-t border-gray-200">
-                <div className="mt-3 space-y-1">
-                  {user ? (
-                    <>
-                      <Link
-                        href="/dashboard"
-                        className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#39a3b1] rounded-md"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        Dashboard
-                      </Link>
-                      <button
-                        onClick={() => {
-                          logout()
-                          setIsMobileMenuOpen(false)
-                        }}
-                        className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#39a3b1] rounded-md"
-                      >
-                        Sign Out
-                      </button>
-                    </>
-                  ) : (
-                    <Link
-                      href="/login"
-                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#39a3b1] rounded-md"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Sign In
-                    </Link>
-                  )}
-                  <Link
-                    href="/contact"
-                    className="block px-3 py-2 text-base font-medium hover:bg-gray-50 rounded-md"
-                    onClick={() => setIsMobileMenuOpen(false)}
+            </nav>
+
+            {/* Language Selector - Mobile */}
+            <div className="mt-6 border-t border-gray-200 pt-4">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                Language / Langue / اللغة
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    className={`flex items-center justify-center px-3 py-2 text-sm font-medium rounded-md ${
+                      currentLanguage === lang.code
+                        ? "bg-gray-100 text-[#39a3b1]"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-[#39a3b1]"
+                    }`}
+                    onClick={() => handleLanguageChange(lang.code as "en" | "ar" | "fr")}
                   >
-                    Contact Us
-                  </Link>
-                </div>
+                    <span className="mr-1">{lang.flag}</span>
+                    <span>{lang.name}</span>
+                  </button>
+                ))}
               </div>
             </div>
+
+            {/* Authentication & Contact - Mobile */}
+            <div className="mt-6 border-t border-gray-200 pt-4 space-y-2">
+              {user ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center justify-center w-full px-4 py-3 text-base font-medium bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200"
+                    onClick={toggleMobileMenu}
+                  >
+                    <Layout className="h-5 w-5 mr-2" /> Dashboard
+                  </Link>
+                  <button
+                    onClick={() => {
+                      logout()
+                      toggleMobileMenu()
+                    }}
+                    className="flex items-center justify-center w-full px-4 py-3 text-base font-medium border border-gray-200 text-gray-700 rounded-md hover:bg-gray-50"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className="flex items-center justify-center w-full px-4 py-3 text-base font-medium bg-[#39a3b1] text-white rounded-md hover:bg-[#39a3b1]/90"
+                  onClick={toggleMobileMenu}
+                >
+                  <LogIn className="h-5 w-5 mr-2" /> Sign In
+                </Link>
+              )}
+              <Link
+                href="/contact"
+                className="flex items-center justify-center w-full px-4 py-3 text-base font-medium border border-gray-200 text-gray-700 rounded-md hover:bg-gray-50"
+                onClick={toggleMobileMenu}
+              >
+                <Mail className="h-5 w-5 mr-2" /> Contact Us
+              </Link>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   )
 }
