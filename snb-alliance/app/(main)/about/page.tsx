@@ -99,8 +99,8 @@ export default function AboutPage() {
   </div>
 
   {/* Content Wrapper */}
-  <div className="relative container mx-auto px-6 md:px-12">
-    <div className="max-w-2xl text-center md:text-left">
+  <div className="relative px-6">
+    <div className="max-w-2xl md:text-left">
       <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">WHO WE ARE</h1>
       <p className="text-lg md:text-xl text-white/90 leading-relaxed">
         SnB Alliance is a non-profit organization dedicated to setting standards and providing 

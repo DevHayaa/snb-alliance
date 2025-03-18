@@ -564,40 +564,39 @@ export default function MembershipPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Event 1 */}
               <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <div className="text-[#39a3b1] font-bold mb-2">June 15, 2025</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Networking Mixer</h3>
+                <div className="text-[#39a3b1] font-bold mb-2">September 10-11, 2025</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Mastering Bid & Proposal Writing</h3>
                 <p className="text-gray-600 mb-4">
-                  Connect with fellow members and industry professionals in a relaxed setting.
+                Comprehensive training on creating winning proposals with hands-on exercises and expert feedback.
                 </p>
                 <div className="flex items-center text-sm text-gray-500">
                   <Calendar className="h-4 w-4 mr-1" />
-                  <span>7:00 PM - 9:00 PM EST</span>
+                  <span>10:00 AM - 4:00 PM EST (both days)</span>
                 </div>
               </div>
 
               {/* Event 2 */}
               <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <div className="text-[#39a3b1] font-bold mb-2">July 10, 2025</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Leadership Workshop</h3>
+                <div className="text-[#39a3b1] font-bold mb-2">November 5, 2025</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Recruitment Metrics & Performance Analytics</h3>
                 <p className="text-gray-600 mb-4">
-                  Develop essential leadership skills with our expert-led interactive workshop.
-                </p>
+                Learn how to leverage data analytics to measure and improve recruitment performance.                </p>
                 <div className="flex items-center text-sm text-gray-500">
                   <Calendar className="h-4 w-4 mr-1" />
-                  <span>1:00 PM - 4:00 PM EST</span>
+                  <span>1:00 PM - 2:30 PM EST</span>
                 </div>
               </div>
 
               {/* Event 3 */}
               <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <div className="text-[#39a3b1] font-bold mb-2">August 5, 2025</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Industry Panel Discussion</h3>
+                <div className="text-[#39a3b1] font-bold mb-2">October 7-8, 2025</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">RFP Compliance & Risk Management</h3>
                 <p className="text-gray-600 mb-4">
-                  Hear insights from industry leaders on the future of bidding and recruitment.
+                In-depth workshop on navigating compliance requirements and mitigating risks in the bidding process.
                 </p>
                 <div className="flex items-center text-sm text-gray-500">
                   <Calendar className="h-4 w-4 mr-1" />
-                  <span>11:00 AM - 12:30 PM EST</span>
+                  <span>9:00 AM - 5:00 PM EST (both days)</span>
                 </div>
               </div>
             </div>

@@ -303,7 +303,7 @@ const megaMenuContent = {
       },
       {
         title: "Certification Journey",
-        href: "/certifications/journey",
+        href: "/certifications#csba",
         items: [
           { title: "Certification Process", href: "/certifications#certification-process", icon: "GitBranch" },
           { title: "Exam & Fees", href: "/certifications#exam-fees", icon: "FileText" },
@@ -347,6 +347,7 @@ const megaMenuContent = {
         title: "Events & Calendar",
         href: "/learning/events&Calendar",
         items: [
+          { title: "Upcoming Events", href: "/learning/events&Calendar#upcoming-events", icon: "Video" },
           { title: "Workshops & Webinars", href: "/learning/events&Calendar#workshops-webinars", icon: "Video" },
           { title: "Request Information", href: "/learning/events&Calendar#request-information", icon: "Book" },
           { title: "Learning Schedule", href: "/learningevents&Calendar#learning-schedule", icon: "HelpCircle" },
@@ -410,7 +411,7 @@ const megaMenuContent = {
     columns: [
       {
         title: "Who We Are",
-        href: "/about#who-we-are",
+        href: "/about",
         items: [
           { title: "Mission & Vision", href: "/about#mission-vision", icon: "LightbulbIcon" },
           { title: "What We Do", href: "/about#what-we-do", icon: "Briefcase" },
@@ -462,7 +463,7 @@ const megaMenuContent = {
       },
       {
         title: "Member Community",
-        href: "/membership/community",
+        href: "/dashboard",
         items: [
           { title: "Upcoming Events", href: "/membership#events", icon: "Calendar" },
           { title: "Success Stories", href: "/membership#stories", icon: "Star" },

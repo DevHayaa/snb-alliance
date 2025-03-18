@@ -93,7 +93,7 @@ export default function BusinessesPage() {
                   href="/contact"
                   className="inline-flex items-center px-6 py-3 bg-[#39a3b1] text-white rounded-md hover:bg-[#2c8a96] transition-colors"
                 >
-                  <span>🚀 Get a Custom Training Plan</span>
+                  <span>Get a Custom Training Plan</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
@@ -180,7 +180,7 @@ export default function BusinessesPage() {
                   href="/learning/teamPackages"
                   className="inline-flex items-center px-6 py-3 bg-[#f0932a] text-white rounded-md hover:bg-[#e08620] transition-colors"
                 >
-                  <span>💡 Explore Team Packages</span>
+                  <span>Explore Team Packages</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
@@ -229,7 +229,7 @@ export default function BusinessesPage() {
               className="inline-flex items-center px-8 py-4 bg-[#f0932a] text-white rounded-md hover:bg-[#e08620] transition-colors text-lg font-medium"
             >
               <Briefcase className="mr-2 h-5 w-5" />
-              <span>💼 Partner with SnB Alliance</span>
+              <span>Partner with SnB Alliance</span>
             </Link>
           </div>
         </div>
@@ -285,7 +285,7 @@ export default function BusinessesPage() {
                   href="/contact"
                   className="inline-flex items-center px-6 py-3 bg-[#39a3b1] text-white rounded-md hover:bg-[#2c8a96] transition-colors"
                 >
-                  <span>📞 Request a Consultation</span>
+                  <span>Request a Consultation</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
@@ -368,7 +368,7 @@ export default function BusinessesPage() {
               href="/contact"
               className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 transition-colors"
             >
-              <span>🔍 Talk to Our Training Advisors</span>
+              <span>Talk to Our Training Advisors</span>
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
