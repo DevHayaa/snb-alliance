@@ -1,0 +1,58 @@
+#first
+trigger:
+- main
+
+stages:
+# Deployment Stage
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '.'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/nextt.zip'
+        replaceExistingArchive: true
+    # Copy source code to the VM using SSH
+    - task: CopyFilesOverSSH@0
+      inputs:
+        sshEndpoint: 'snb-alliance'
+        sourceFolder: '$(Build.ArtifactStagingDirectory)/'  # Path where your source code is located
+        targetFolder: '/home/azureuser/snb-alliance'
+        cleanTargetFolder: True
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'snb-alliance'
+        runOptions: 'inline'
+        inline: 'cd /home/azureuser/snb-alliance && unzip -o nextt.zip'
+        readyTimeout: '20000'
+    
+    # SSH to the VM to install npm dependencies
+ 
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'snb-alliance'
+        runOptions: 'inline'
+        inline: 'sudo chown -R azureuser:azureuser /home/azureuser/snb-alliance && cd /home/azureuser/snb-alliance/s/ && npm install --legacy-peer-deps --loglevel=error && npm run build'
+        readyTimeout: '20000'
+
+    # Stop the existing Next.js application running with PM2
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'snb-alliance'
+        runOptions: 'commands'
+        commands: |
+          pm2 stop snb-alliance || echo "App not running, skipping stop"
+
+    # Restart the Next.js application using PM2
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'snb-alliance'
+        runOptions: 'commands'
+        commands: |
+          cd /home/azureuser/snb-alliance/s && pm2 restart snb-alliance || pm2 start npm --name "snb-alliance" -- start 
+          pm2 save && sudo systemctl reload nginx
