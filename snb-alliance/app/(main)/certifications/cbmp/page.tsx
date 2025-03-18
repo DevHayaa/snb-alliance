@@ -8,9 +8,12 @@ export default function CBMPCertificationPage() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-10 text-center">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">
-            Certificate in Bid & Management Professional (CBMP)
-          </h1>
+          <div className="flex justify-center items-center mb-4">
+            <img src="/cbmp.png" alt="CBMP Logo" className="h-30 w-40 mr-4" />
+            <h1 className="text-4xl font-bold tracking-tight">
+              Certificate in Bid & Management Professional (CBMP)
+            </h1>
+          </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Advance your career with specialized knowledge in bid management and proposal writing
           </p>

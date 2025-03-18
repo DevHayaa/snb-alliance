@@ -8,7 +8,10 @@ export default function CSMPCertificationPage() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-10 text-center">
+        <div className="flex justify-center items-center mb-4">
+        <img src="/csmp.png" alt="CBMP Logo" className="h-30 w-40 mr-4" />
           <h1 className="text-4xl font-bold tracking-tight mb-4">Certified Staffing Management Professional (CSMP)</h1>
+          </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Become an expert in resource management and staffing operations
           </p>

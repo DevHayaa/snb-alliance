@@ -8,7 +8,10 @@ export default function CSBLCertificationPage() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-10 text-center">
+        <div className="flex justify-center items-center mb-4">
+        <img src="/csbl.png" alt="CBMP Logo" className="h-30 w-40 mr-4" />
           <h1 className="text-4xl font-bold tracking-tight mb-4">Certified Staffing And Bidding Leader (CSBL)</h1>
+          </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             The highest level of certification for staffing and bidding professionals in leadership positions
           </p>

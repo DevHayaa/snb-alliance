@@ -8,9 +8,12 @@ export default function CSBACertificationPage() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-10 text-center">
+        <div className="flex justify-center items-center mb-4">
+        <img src="/csba.png" alt="CBMP Logo" className="h-30 w-40 mr-4" />
           <h1 className="text-4xl font-bold tracking-tight mb-4">
             Certificate In Staffing & Bidding Associates (CSBA)
           </h1>
+          </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Your first step into the professional world of staffing and bidding
           </p>
