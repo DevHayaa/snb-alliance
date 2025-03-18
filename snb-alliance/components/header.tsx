@@ -303,7 +303,7 @@ const megaMenuContent = {
       },
       {
         title: "Certification Journey",
-        href: "/certifications#csba",
+        href: "/certifications#certification-process",
         items: [
           { title: "Certification Process", href: "/certifications#certification-process", icon: "GitBranch" },
           { title: "Exam & Fees", href: "/certifications#exam-fees", icon: "FileText" },
@@ -311,9 +311,9 @@ const megaMenuContent = {
       },
       {
         title: "Resources",
-        href: "/resources/certification",
+        href: "/resources",
         items: [
-          { title: "Certification FAQ", href: "/resources#certification-faq", icon: "HelpCircle" },
+          { title: "Certification FAQ", href: "/resources#faqs", icon: "HelpCircle" },
           { title: "Success Stories", href: "/learning#testimonials", icon: "Star" },
         ],
       },
@@ -350,8 +350,6 @@ const megaMenuContent = {
           { title: "Upcoming Events", href: "/learning/events&Calendar#upcoming-events", icon: "Video" },
           { title: "Workshops & Webinars", href: "/learning/events&Calendar#workshops-webinars", icon: "Video" },
           { title: "Request Information", href: "/learning/events&Calendar#request-information", icon: "Book" },
-          { title: "Learning Schedule", href: "/learningevents&Calendar#learning-schedule", icon: "HelpCircle" },
-          { title: "Learning FAQ", href: "/learningevents&Calendar#learning-faqs", icon: "Mail" },
         ],
       },
     ],
