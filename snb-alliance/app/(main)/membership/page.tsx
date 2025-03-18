@@ -604,7 +604,7 @@ export default function MembershipPage() {
 
             <div className="text-center mt-8">
               <Link
-                href="/membership/events"
+                href="/learning/events&Calendar"
                 className="inline-flex items-center px-6 py-3 bg-[#39a3b1] text-white font-medium rounded-md hover:bg-[#39a3b1]/90 transition-colors"
               >
                 View All Events <ArrowRight className="ml-2 h-4 w-4" />

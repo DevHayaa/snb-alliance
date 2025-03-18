@@ -461,7 +461,7 @@ const megaMenuContent = {
         items: [
           { title: "Upcoming Events", href: "/membership#events", icon: "Calendar" },
           { title: "Success Stories", href: "/membership#stories", icon: "Star" },
-          { title: "Member Directory", href: "/membership/directory", icon: "Book" },
+          { title: "Member Directory", href: "/dashboard", icon: "Book" },
           { title: "Contact Support", href: "/contact", icon: "HelpCircle" },
         ],
       },

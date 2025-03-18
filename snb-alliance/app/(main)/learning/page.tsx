@@ -214,7 +214,7 @@ export default function LearningPage() {
                     </div>
                   </div>
                   <Link
-                    href="/workshops/advanced-bidding-strategies"
+                    href="/contact"
                     className="inline-flex items-center px-4 py-2 bg-[#39a3b1] text-white font-medium rounded-md hover:bg-[#39a3b1] transition-colors"
                   >
                     Register Now <ArrowRight className="ml-2 h-4 w-4" />

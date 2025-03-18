@@ -177,8 +177,8 @@ export default async function HomePage() {
               <Image
                 src="/whyus.png"
                 alt="Student with notebook"
-                width={400}
-                height={600}
+                width={800}
+                height={400}
                 className="rounded-[2rem]"
               />
             </div>

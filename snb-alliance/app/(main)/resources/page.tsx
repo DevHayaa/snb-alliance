@@ -32,7 +32,7 @@ const resourceCategories = [
     description:
       "Stay updated with the latest trends, expert opinions, and forecasts in bidding and recruitment.",
     icon: BarChart,
-    href: "/resources/insights",
+    href: "/resources/industryBestPractice#insights",
     color: "bg-blue-50 text-blue-700 border-blue-200",
   },
   {
@@ -40,7 +40,7 @@ const resourceCategories = [
     description:
       "Access guides, compliance checklists, and templates for optimal results.",
     icon: CheckSquare,
-    href: "/resources/best-practices",
+    href: "/resources/industryBestPractice#best-practices",
     color: "bg-green-50 text-green-700 border-green-200",
   },
   {
@@ -48,16 +48,8 @@ const resourceCategories = [
     description:
       "Download ready-to-use templates and access specialized tools for bidding and staffing.",
     icon: FileText,
-    href: "/resources/templates",
+    href: "/resources/templatesTools",
     color: "bg-purple-50 text-purple-700 border-purple-200",
-  },
-  {
-    title: "FAQs",
-    description:
-      "Find answers to common questions about certifications, exams, and membership.",
-    icon: HelpCircle,
-    href: "/resources/faqs",
-    color: "bg-amber-50 text-amber-700 border-amber-200",
   },
 ]
 

@@ -61,7 +61,7 @@ const certifications = [
     duration: "60 hours (8-10 weeks part-time)",
     assessment: "Multiple-choice exam (2 hours) + Practical assignment",
     fee: "$499",
-    image: "/csbl.png",
+    image: "/csmp.png",
   },
   {
     id: "csbl",
@@ -76,7 +76,7 @@ const certifications = [
     duration: "80 hours (10-12 weeks part-time)",
     assessment: "Multiple-choice exam (3 hours) + Case study + Interview",
     fee: "$799",
-    image: "/csmp.png",
+    image: "/csbl.png",
   },
 ]
 
