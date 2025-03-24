@@ -102,30 +102,31 @@ export default function ResourcesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-       <section className="relative py-20 min-h-[60vh] flex items-center bg-[#007b8f] md:bg-transparent">
-        {/* Background Image - Visible Only on Medium & Larger Screens */}
-        <div className="inset-0 overflow-hidden hidden md:block">
-          <div className=" inset-0 bg-black/50" /> {/* Dark overlay for contrast */}
-          <Image
-            src="/resourcesBanner.png"
-            alt="Team collaboration"
-            fill
-            className="object-cover w-full h-full"
-            priority
-          />
-        </div>
-      
-        {/* Content Wrapper */}
-        <div className="relative container mx-auto px-6 md:px-12">
-          <div className="max-w-2xl text-center md:text-left">
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">Resources Hub</h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-            Access industry insights, tools, templates, and educational content
-            to elevate your bidding and recruitment career.
-            </p>
-          </div>
-        </div>
-      </section>
+      <section className="relative py-20 min-h-[60vh] flex items-center bg-[#007b8f] md:bg-transparent">
+  {/* Background Image - Visible Only on Medium & Larger Screens */}
+  <div className="absolute inset-0 overflow-hidden hidden md:block">
+    <div className="absolute inset-0" /> {/* Dark overlay for contrast */}
+    <Image
+      src="/resourcesBanner.png"
+      alt="Team collaboration"
+      fill
+      className="object-cover w-full h-full"
+      priority
+    />
+  </div>
+
+  {/* Content Wrapper */}
+  <div className="relative container mx-auto px-6 md:px-12 flex flex-col items-center md:items-start text-center md:text-left">
+    <div className="max-w-xl">
+      <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">Resources Hub</h1>
+      <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+        Access industry insights, tools, templates, and educational content
+        to elevate your bidding and recruitment career.
+      </p>
+    </div>
+  </div>
+</section>
+
 
       {/* Resource Categories */}
       <section className="py-16">

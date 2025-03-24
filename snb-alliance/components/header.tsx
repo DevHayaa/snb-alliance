@@ -43,6 +43,7 @@ import {
   X,
   Menu,
 } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 // Import the useAuth hook at the top of the file
 import { useAuth } from "@/contexts/auth-context"
@@ -62,13 +63,13 @@ const navItems = [
       },
       {
         title: "CSBA",
-        description: "Certificate in Staffing & Bidding Associates",
+        description: "Certificate in Staffing Bidding Associates",
         href: "/certifications#csba",
         icon: "GraduationCap",
       },
       {
         title: "CBMP",
-        description: "Certificate in Bid & Management Professional",
+        description: "Certificate in Bid Management Professional",
         href: "/certifications#cbmp",
         icon: "ClipboardCheck",
       },
@@ -80,7 +81,7 @@ const navItems = [
       },
       {
         title: "CSBL",
-        description: "Certified Staffing and Bidding Leader",
+        description: "Certified Staffing Bidding Leader",
         href: "/certifications#csbl",
         icon: "Trophy",
       },
@@ -295,15 +296,15 @@ const megaMenuContent = {
         title: "Our Certifications",
         href: "/certifications",
         items: [
-          { title: "CSBA - Staffing & Bidding Associates", href: "/certifications#csba", icon: "GraduationCap" },
-          { title: "CBMP - Bid & Management Professional", href: "/certifications#cbmp", icon: "ClipboardCheck" },
-          { title: "CSMP - Staffing Management Professional", href: "/certifications#csmp", icon: "Users" },
-          { title: "CSBL - Staffing and Bidding Leader", href: "/certifications#csbl", icon: "Trophy" },
+          { title: "CSBA - Certified Staffing Bidding Associates", href: "/certifications#csba", icon: "GraduationCap" },
+          { title: "CBMP - Certified Bid Management Professional", href: "/certifications#cbmp", icon: "ClipboardCheck" },
+          { title: "CSMP - Certified Staffing Management Professional", href: "/certifications#csmp", icon: "Users" },
+          { title: "CSBL - Certified Staffing Bidding Leader", href: "/certifications#csbl", icon: "Trophy" },
         ],
       },
       {
         title: "Certification Journey",
-        href: "/certifications#certification-process",
+        href: "/certifications/journey",
         items: [
           { title: "Certification Process", href: "/certifications#certification-process", icon: "GitBranch" },
           { title: "Exam & Fees", href: "/certifications#exam-fees", icon: "FileText" },
@@ -311,9 +312,9 @@ const megaMenuContent = {
       },
       {
         title: "Resources",
-        href: "/resources",
+        href: "/resources/certification",
         items: [
-          { title: "Certification FAQ", href: "/resources#faqs", icon: "HelpCircle" },
+          { title: "Certification FAQ", href: "/resources#certification-faq", icon: "HelpCircle" },
           { title: "Success Stories", href: "/learning#testimonials", icon: "Star" },
         ],
       },
@@ -347,9 +348,10 @@ const megaMenuContent = {
         title: "Events & Calendar",
         href: "/learning/events&Calendar",
         items: [
-          { title: "Upcoming Events", href: "/learning/events&Calendar#upcoming-events", icon: "Video" },
           { title: "Workshops & Webinars", href: "/learning/events&Calendar#workshops-webinars", icon: "Video" },
           { title: "Request Information", href: "/learning/events&Calendar#request-information", icon: "Book" },
+          { title: "Learning Schedule", href: "/learningevents&Calendar#learning-schedule", icon: "HelpCircle" },
+          { title: "Learning FAQ", href: "/learningevents&Calendar#learning-faqs", icon: "Mail" },
         ],
       },
     ],
@@ -409,7 +411,7 @@ const megaMenuContent = {
     columns: [
       {
         title: "Who We Are",
-        href: "/about",
+        href: "/about#who-we-are",
         items: [
           { title: "Mission & Vision", href: "/about#mission-vision", icon: "LightbulbIcon" },
           { title: "What We Do", href: "/about#what-we-do", icon: "Briefcase" },
@@ -461,7 +463,7 @@ const megaMenuContent = {
       },
       {
         title: "Member Community",
-        href: "/dashboard",
+        href: "/membership/community",
         items: [
           { title: "Upcoming Events", href: "/membership#events", icon: "Calendar" },
           { title: "Success Stories", href: "/membership#stories", icon: "Star" },
@@ -515,6 +517,10 @@ const getIconComponent = (iconName: string) => {
   return iconMap[iconName] || null
 }
 
+type HeaderProps = {
+  setLanguage: (language: string) => void
+}
+
 export default function Header() {
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -525,30 +531,62 @@ export default function Header() {
   const { user, logout } = useAuth()
   const pathname = usePathname()
 
-  const [currentLanguage, setCurrentLanguage] = useState<"en" | "ar" | "fr">("en")
-  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
+    const { language: currentLanguage, setLanguage } = useLanguage(); // Get current language
+    const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null); // Ref for handling outside click
+  
+      // Handle language change and close the menu
+  const handleLanguageChange = (langCode: string) => {
+    setLanguage(langCode); // Update language
+    setIsMobileMenuOpen(false); // Close menu after selection
+  };
 
-  const languages = [
-    { code: "en", name: "English", flag: "🇺🇸" },
-    { code: "ar", name: "العربية", flag: "🇸🇦" },
-    { code: "fr", name: "Français", flag: "🇫🇷" },
-  ]
+    // Language options
+    const languages = [
+      { code: "en", name: "English", flag: "🇬🇧" },
+      { code: "fr", name: "Français", flag: "🇫🇷" },
+      { code: "ar", name: "العربية", flag: "🇸🇦" },
+    ];
+  
+    // // Handle language change
+    // const handleLanguageChange = (langCode: string) => {
+    //   setLanguage(langCode);
+    //   setIsLanguageMenuOpen(false); // Close dropdown after selection
+    // };
+  
+    // Close dropdown if clicked outside
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+          setIsLanguageMenuOpen(false);
+        }
+      };
+  
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
+  
 
-  const handleLanguageChange = (langCode: "en" | "ar" | "fr") => {
-    setCurrentLanguage(langCode)
-    setIsLanguageMenuOpen(false)
-    // Here you would implement actual language change functionality
-  }
 
   const toggleMegaMenu = (title: string) => {
     setActiveMegaMenu(activeMegaMenu === title ? null : title)
   }
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-    if (isMobileMenuOpen) {
+    const newState = !isMobileMenuOpen
+    setIsMobileMenuOpen(newState)
+
+    // Reset submenu states when closing
+    if (!newState) {
       setActiveMobileMenu(null)
       setActiveMobileSubmenu(null)
+      // Restore body scroll
+      document.body.style.overflow = "auto"
+    } else {
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = "hidden"
     }
   }
 
@@ -685,37 +723,36 @@ export default function Header() {
           {/* Right Side Actions */}
           <div className="flex items-center space-x-2 md:space-x-3">
             {/* Language Selector - Desktop */}
-            <div className="hidden md:block relative">
-              <button
-                className="flex items-center space-x-1 px-2 py-1.5 text-sm font-medium border border-gray-200 rounded-md hover:bg-gray-50"
-                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                aria-expanded={isLanguageMenuOpen}
-              >
-                <span className="mr-1">{languages.find((lang) => lang.code === currentLanguage)?.flag}</span>
-                <span>{currentLanguage.toUpperCase()}</span>
-                <ChevronDown className={`h-4 w-4 transition-transform ${isLanguageMenuOpen ? "rotate-180" : ""}`} />
-              </button>
+    <div className="relative hidden md:block" ref={dropdownRef}>
+      <button
+        className="flex items-center space-x-1 px-2 py-1.5 text-sm font-medium border border-gray-200 rounded-md hover:bg-gray-50"
+              onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+              aria-expanded={isLanguageMenuOpen}
+            >
+              <Globe className="h-4 w-4 mr-1.5" />
+              <span>{currentLanguage.toUpperCase()}</span>
+              <ChevronDown className={`h-4 w-4 transition-transform ${isLanguageMenuOpen ? "rotate-180" : ""}`} />
+            </button>
 
-              {isLanguageMenuOpen && (
-                <div className="absolute right-0 mt-1 w-40 bg-white rounded-md shadow-lg z-50 border border-gray-100">
-                  <div className="py-1">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        className={`flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-50 ${
-                          currentLanguage === lang.code ? "bg-gray-50 text-[#39a3b1] font-medium" : "text-gray-700"
-                        }`}
-                        onClick={() => handleLanguageChange(lang.code as "en" | "ar" | "fr")}
-                      >
-                        <span className="mr-2">{lang.flag}</span>
-                        <span>{lang.name}</span>
-                      </button>
-                    ))}
-                  </div>
+            {isLanguageMenuOpen && (
+              <div className="absolute right-0 mt-1 w-40 bg-white rounded-md shadow-lg z-50 border border-gray-100">
+                <div className="py-1">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      className={`flex items-center w-full px-4 py-2 text-sm text-left hover:bg-gray-50 ${
+                        currentLanguage === lang.code ? "bg-gray-50 text-[#39a3b1] font-medium" : "text-gray-700"
+                      }`}
+                      onClick={() => handleLanguageChange(lang.code)}
+                    >
+                      <span className="mr-2">{lang.flag}</span>
+                      <span>{lang.name}</span>
+                    </button>
+                  ))}
                 </div>
-              )}
-            </div>
-
+              </div>
+            )}
+          </div>
             <Link
               href="/contact"
               className="hidden md:inline-flex px-3 py-2 text-sm font-medium border border-gray-200 rounded-md hover:bg-gray-50"
@@ -829,6 +866,15 @@ export default function Header() {
           className="fixed inset-0 z-50 bg-white overflow-y-auto lg:hidden pt-16"
           style={{ maxHeight: "100vh" }}
         >
+          {/* Add a fixed close button at the top right of the mobile menu */}
+          <button
+            onClick={toggleMobileMenu}
+            className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="h-6 w-6 text-gray-700" />
+          </button>
+
           <div className="container mx-auto px-4 py-4">
             {/* Main Navigation Items */}
             <nav className="space-y-1">
@@ -912,21 +958,20 @@ export default function Header() {
 
             {/* Language Selector - Mobile */}
             <div className="mt-6 border-t border-gray-200 pt-4">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                Language / Langue / اللغة
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 flex items-center">
+                <Globe className="h-3.5 w-3.5 mr-1" /> Language / Langue / اللغة
               </p>
               <div className="grid grid-cols-3 gap-2">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
-                    className={`flex items-center justify-center px-3 py-2 text-sm font-medium rounded-md ${
+                    className={`flex items-center justify-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
                       currentLanguage === lang.code
                         ? "bg-gray-100 text-[#39a3b1]"
                         : "text-gray-700 hover:bg-gray-50 hover:text-[#39a3b1]"
                     }`}
-                    onClick={() => handleLanguageChange(lang.code as "en" | "ar" | "fr")}
+                    onClick={() => handleLanguageChange(lang.code)}
                   >
-                    <span className="mr-1">{lang.flag}</span>
                     <span>{lang.name}</span>
                   </button>
                 ))}

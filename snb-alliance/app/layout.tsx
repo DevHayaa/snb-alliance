@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { AuthProvider } from "@/contexts/auth-context"
+import { LanguageProvider } from "@/contexts/LanguageContext"
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,14 +24,18 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <AuthProvider>
-          {/* We'll handle the header and footer in each specific layout */}
-          <main className="min-h-screen">{children}</main>
-        </AuthProvider>
-      </body>
-    </html>
-  )
+    <LanguageProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <AuthProvider>
+            {/* We'll handle the header and footer in each specific layout */}
+            <main className="min-h-screen">{children}</main>
+          </AuthProvider>
+        </body>
+      </html>
+    </LanguageProvider>
+  );
 }
+
+
 

@@ -85,10 +85,10 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 min-h-[60vh] flex items-center bg-[#007b8f] md:bg-transparent">
-  {/* Background Image - Visible Only on Medium & Larger Screens */}
-  <div className="inset-0 overflow-hidden hidden md:block">
-    <div className=" inset-0 bg-black/50" /> {/* Dark overlay for contrast */}
+      <section className="relative py-20 min-h-[60vh] flex items-center bg-[#0c6a77]">
+  {/* Background Image - Visible Only on Large Screens */}
+  <div className="absolute inset-0 hidden lg:block">
+    <div className="absolute inset-0" /> {/* Dark overlay for contrast */}
     <Image
       src="/aboutBanner.png"
       alt="Team collaboration"
@@ -99,8 +99,8 @@ export default function AboutPage() {
   </div>
 
   {/* Content Wrapper */}
-  <div className="relative px-6">
-    <div className="max-w-2xl md:text-left">
+  <div className="relative container mx-auto px-4 w-full flex flex-col items-center lg:items-start text-center lg:text-left">
+    <div className="lg:max-w-xl">
       <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">WHO WE ARE</h1>
       <p className="text-lg md:text-xl text-white/90 leading-relaxed">
         SnB Alliance is a non-profit organization dedicated to setting standards and providing 
@@ -110,6 +110,9 @@ export default function AboutPage() {
     </div>
   </div>
 </section>
+
+
+
 
 
       {/* Mission & Vision Section */}

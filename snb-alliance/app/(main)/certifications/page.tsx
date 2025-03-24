@@ -299,44 +299,47 @@ export default function CertificationsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/certificationBanner.png"
-            alt="Abstract geometric background"
-            fill
-            className="object-cover object-right md:object-center"
-            priority
-          />
-        </div>
+      <section className="relative py-16 md:py-24 overflow-hidden bg-[#0c6a77]">
+  {/* Background Image - Visible Only on Large Screens */}
+  <div className="absolute hidden inset-0 lg:block">
+    <Image
+      src="/certificationBanner.png"
+      alt="Abstract geometric background"
+      fill
+      className="object-cover object-right md:object-center"
+      priority
+    />
+  </div>
 
-        {/* Content Wrapper */}
-        <div className="relative container mx-auto px-4 flex justify-end">
-          <div className="max-w-3xl text-white text-right">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              SnB Alliance Certifications
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90">
-              Advance your career with our industry-recognized certifications in bidding and recruitment.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-end">
-              <Link
-                href="#certification-options"
-                className="px-6 py-3 bg-white text-[#39a3b1] font-medium rounded-md hover:bg-gray-100 transition-colors"
-              >
-                Explore Certifications
-              </Link>
-              <Link
-                href="#certification-process"
-                className="px-6 py-3 bg-transparent border border-white text-white font-medium rounded-md hover:bg-white/10 transition-colors"
-              >
-                View Certification Process
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+  {/* Content Wrapper */}
+  <div className="relative mb-12 container mx-auto px-4 flex flex-col items-center lg:items-end text-center lg:text-right">
+    <div className="max-w-3xl text-white">
+      <h1 className="text-4xl md:text-5xl font-bold mb-6">
+        SnB Alliance Certifications
+      </h1>
+      <p className="text-xl md:text-2xl mb-8 text-white/90">
+        Advance your career with our industry-recognized certifications in bidding and recruitment.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
+        <Link
+          href="#certification-options"
+          className="px-6 py-3 bg-white text-[#39a3b1] font-medium rounded-md hover:bg-gray-100 transition-colors"
+        >
+          Explore Certifications
+        </Link>
+        <Link
+          href="#certification-process"
+          className="px-6 py-3 bg-transparent border border-white text-white font-medium rounded-md hover:bg-white/10 transition-colors"
+        >
+          View Certification Process
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
 
 
