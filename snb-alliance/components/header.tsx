@@ -296,10 +296,10 @@ const megaMenuContent = {
         title: "Our Certifications",
         href: "/certifications",
         items: [
-          { title: "CSBA - Certified Staffing Bidding Associates", href: "/certifications#csba", icon: "GraduationCap" },
+          { title: "CSBA - Certified Staffing & Bidding Associates", href: "/certifications#csba", icon: "GraduationCap" },
           { title: "CBMP - Certified Bid Management Professional", href: "/certifications#cbmp", icon: "ClipboardCheck" },
           { title: "CSMP - Certified Staffing Management Professional", href: "/certifications#csmp", icon: "Users" },
-          { title: "CSBL - Certified Staffing Bidding Leader", href: "/certifications#csbl", icon: "Trophy" },
+          { title: "CSBL - Certified Staffing & Bidding Leader", href: "/certifications#csbl", icon: "Trophy" },
         ],
       },
       {
@@ -691,7 +691,7 @@ export default function Header() {
                 alt="SnB Alliance Logo"
                 width={180}
                 height={100}
-                className=""
+                className="mt-3"
                 priority
               />
             </div>
