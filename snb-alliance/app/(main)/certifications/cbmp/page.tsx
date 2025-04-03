@@ -11,7 +11,7 @@ export default function CBMPCertificationPage() {
           <div className="flex justify-center items-center mb-4">
             <img src="/cbmp.png" alt="CBMP Logo" className="h-30 w-40 mr-4" />
             <h1 className="text-4xl font-bold tracking-tight">
-              Certificate in Bid & Management Professional (CBMP)
+              Certified Bid Management Professional (CBMP)
             </h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

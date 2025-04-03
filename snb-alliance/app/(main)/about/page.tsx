@@ -12,25 +12,72 @@ import Footer from "@/components/footer"
 
 interface AboutData {
   acf: {
-    workshops_webinars_heading: string
-    workshops_webinars_subheading: string
-    webinar_date_time: any
-    webinar_title: string
-    webinar_description: string
-    webinar_btn_1: string
-    webinar_btn_2: string
-    learning_journey_heading: string
-    enrollment_title: string
-    enrollment_description: string
-    flexible_learning_title: string
-    flexible_learning_description: string
-    practical_skills_title: string
-    practical_skills_description: string
-    certification_title: string
-    certification_description: string
+    hero_batch: string
     hero_banner: string
     hero_title: string
     hero_description: string
+    mission_vision_cards: {
+      mission_title: string
+      mission_description: string
+      vision_title: string
+      vision_description: string
+     
+    };
+    what_we_do:{
+      what_we_do_batch: string
+      what_we_do_heading: string
+      certification_title: string
+      certification_description: string
+      learning_training_title: string
+      learning_training_description: string
+      resources_community_title: string
+      resources_community_description: string
+    }
+    founding_team:{
+      founding_team_batch: string
+      foundng_team_title: string
+      founding_team_description: string
+    }
+    join_our_mission:{
+      join_our_mission_batch: string
+      join_our_mission_title: string
+      work_with_us_heading:string
+      join_our_mission_description: string
+      work_with_us_point_1:string
+      current_openings_heading:string
+      current_openings_points:string
+      how_to_apply_heading:string
+      how_to_apply_description:string
+
+    }
+    get_in_touch:{
+      get_in_touch_batch: string
+      get_in_touch_heading: string
+      email:string
+      email_heading:string
+      location:string
+      location_heading:string
+    }
+    news_announcements:{
+      news_batch: string
+      news_description: string
+      news_title: string
+    }
+    partners_collaborations:{
+      partners_collaborations_batch:string
+      partners_collaborations_title:string
+      partners_collaborations_description:string
+      point_1_title: string
+      point_1_description: string
+      point_2_title: string
+      point_2_description: string
+      point_3_title: string
+      point_3_description: string
+      partners_batch: string
+      partners_title: string
+      partners_description: string
+      
+    }
   }
 }
 
@@ -273,64 +320,6 @@ export default function AboutPage() {
           ></motion.div>
         </div>
 
-        {/* Floating stats cards */}
-        {/* <div className="absolute top-[15%] right-[5%] z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            className="bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/20"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <Award className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className="text-white/80 text-sm">Certified Professionals</p>
-                <p className="text-white font-bold text-xl">2,500+</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="absolute top-[35%] right-[10%] z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            className="bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/20"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <Globe className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className="text-white/80 text-sm">Global Reach</p>
-                <p className="text-white font-bold text-xl">15+ Countries</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="absolute top-[15%] left-[5%] z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-            className="bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/20"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <Users className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className="text-white/80 text-sm">Industry Partners</p>
-                <p className="text-white font-bold text-xl">50+</p>
-              </div>
-            </div>
-          </motion.div>
-        </div> */}
-
         <div className="relative z-10 container mx-auto px-4 py-16 md:py-24">
           <div className="max-w-5xl mx-auto">
             <motion.div
@@ -345,7 +334,7 @@ export default function AboutPage() {
                 className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full mb-6"
               >
                 <Sparkles className="w-4 h-4 text-white" />
-                <span className="text-white font-medium">About Our Organization</span>
+                <span className="text-white font-medium">{aboutData.acf.hero_batch}</span>
               </motion.div>
 
               <motion.h1
@@ -355,7 +344,7 @@ export default function AboutPage() {
                 }}
                 className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight"
               >
-                WHO WE ARE
+            {aboutData.acf.hero_title}
               </motion.h1>
 
               <motion.p
@@ -365,9 +354,7 @@ export default function AboutPage() {
                 }}
                 className="text-white text-xl md:text-2xl max-w-3xl mx-auto mb-10 leading-relaxed"
               >
-                SnB Alliance is a non-profit organization dedicated to setting standards and providing certifications in
-                the bidding and recruitment industries. Through our comprehensive programs and resources, we empower
-                professionals to excel in their careers.
+               {aboutData.acf.hero_description}
               </motion.p>
 
               <motion.div
@@ -418,11 +405,10 @@ export default function AboutPage() {
                 <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <Award className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-3xl font-bold text-white">MISSION</h3>
+                <h3 className="text-3xl font-bold text-white">{aboutData.acf.mission_vision_cards.mission_title}</h3>
               </div>
               <p className="text-white/90 text-lg leading-relaxed relative z-10">
-                To empower individuals and organizations by providing accessible, credible certifications and training
-                programs, thereby creating a more skilled, confident workforce in bidding and recruitment.
+              {aboutData.acf.mission_vision_cards.mission_description}
               </p>
             </div>
           </motion.div>
@@ -443,11 +429,10 @@ export default function AboutPage() {
                 <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <LightbulbIcon className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-3xl font-bold text-white">VISION</h3>
+                <h3 className="text-3xl font-bold text-white">{aboutData.acf.mission_vision_cards.vision_title}</h3>
               </div>
               <p className="text-white/90 text-lg leading-relaxed relative z-10">
-                To become the global benchmark for excellence in staffing and bidding, recognized for fostering
-                innovation, collaboration, and professional growth.
+              {aboutData.acf.mission_vision_cards.vision_description}
               </p>
             </div>
           </motion.div>
@@ -478,7 +463,7 @@ export default function AboutPage() {
               className="inline-flex items-center gap-2 bg-[#ed8523]/10 px-4 py-2 rounded-full mb-4"
             >
               <span className="w-2 h-2 rounded-full bg-[#ed8523] animate-pulse"></span>
-              <span className="text-[#ed8523] font-medium text-sm tracking-wide uppercase">Our Services</span>
+              <span className="text-[#ed8523] font-medium text-sm tracking-wide uppercase">{aboutData.acf.what_we_do.what_we_do_batch}</span>
             </motion.div>
 
             <motion.h2
@@ -488,7 +473,7 @@ export default function AboutPage() {
               }}
               className="text-4xl font-bold text-[#9c242a] mb-6 relative"
             >
-              WHAT WE DO?
+              {aboutData.acf.what_we_do.what_we_do_heading}
               <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#057e8d] to-[#ed8523]"></div>
             </motion.h2>
           </div>
@@ -516,10 +501,9 @@ export default function AboutPage() {
                 <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Award className="h-8 w-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Certifications</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{aboutData.acf.what_we_do.certification_title}</h3>
                 <p className="text-gray-600 mb-6">
-                  We offer a range of certifications designed to validate expertise and enhance career prospects in
-                  bidding and recruitment.
+                {aboutData.acf.what_we_do.certification_description}
                 </p>
                 <Link
                   href="/certifications"
@@ -544,10 +528,9 @@ export default function AboutPage() {
                 <div className="w-16 h-16 rounded-2xl bg-teal-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <GraduationCap className="h-8 w-8 text-teal-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Learning & Training</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{aboutData.acf.what_we_do.learning_training_title}</h3>
                 <p className="text-gray-600 mb-6">
-                  Through interactive and hands-on sessions, we provide comprehensive training to help professionals excel
-                  in their roles.
+                {aboutData.acf.what_we_do.learning_training_description}
                 </p>
                 <Link
                   href="/learning"
@@ -572,10 +555,9 @@ export default function AboutPage() {
                 <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Users className="h-8 w-8 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Resources & Community</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{aboutData.acf.what_we_do.resources_community_title}</h3>
                 <p className="text-gray-600 mb-6">
-                  Our resource hub, coupled with a vibrant community, provides ongoing support and networking
-                  opportunities.
+                {aboutData.acf.what_we_do.resources_community_description}
                 </p>
                 <Link
                   href="/resources"
@@ -608,28 +590,18 @@ export default function AboutPage() {
             <motion.div variants={slideInLeft} className="space-y-8">
               <div className="inline-flex items-center gap-2 bg-[#057e8d]/10 px-4 py-2 rounded-lg mb-2">
                 <span className="w-2 h-2 rounded-full bg-[#057e8d] animate-pulse"></span>
-                <span className="text-[#057e8d] font-medium text-sm tracking-wide uppercase">Our Leadership</span>
+                <span className="text-[#057e8d] font-medium text-sm tracking-wide uppercase">{aboutData.acf.founding_team.founding_team_batch}</span>
               </div>
 
               <h2 className="text-4xl md:text-5xl font-bold text-[#9c242a] relative">
-                Founding Team
+              {aboutData.acf.founding_team.foundng_team_title}
                 <div className="absolute -bottom-4 left-0 w-24 h-1 bg-gradient-to-r from-[#057e8d] to-[#ed8523]"></div>
               </h2>
 
               <p className="text-gray-700 text-lg leading-relaxed">
-                Driven by years of hands-on experience, our founders created SnB Alliance with a shared passion for
-                improving standards across the bidding and recruitment sectors. Their vision and expertise guide our
-                offerings, ensuring we provide relevant, high-quality programs.
+              {aboutData.acf.founding_team.founding_team_description}
               </p>
 
-              {/* <motion.a
-                href="/team"
-                className="inline-flex items-center px-8 py-3 bg-[#057e8d] text-white font-medium rounded-xl hover:bg-[#057e8d]/90 transition-colors shadow-md"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Meet Our Team <ArrowRight className="ml-2 h-5 w-5" />
-              </motion.a> */}
             </motion.div>
 
             <motion.div variants={slideInRight} className="relative">
@@ -745,18 +717,16 @@ export default function AboutPage() {
             <motion.div variants={slideInRight} className="space-y-8 order-1 md:order-2">
               <div className="inline-flex items-center gap-2 bg-[#ed8523]/10 px-4 py-2 rounded-lg mb-2">
                 <span className="w-2 h-2 rounded-full bg-[#ed8523] animate-pulse"></span>
-                <span className="text-[#ed8523] font-medium text-sm tracking-wide uppercase">Collaborations</span>
+                <span className="text-[#ed8523] font-medium text-sm tracking-wide uppercase">{aboutData.acf.partners_collaborations.partners_collaborations_batch}</span>
               </div>
 
               <h2 className="text-4xl md:text-5xl font-bold text-[#9c242a] relative">
-                Partners & Collaborations
+              {aboutData.acf.partners_collaborations.partners_collaborations_title}
                 <div className="absolute -bottom-4 left-0 w-24 h-1 bg-gradient-to-r from-[#057e8d] to-[#ed8523]"></div>
               </h2>
 
               <p className="text-gray-700 text-lg leading-relaxed">
-                We're actively forging partnerships with educational institutions, industry associations, and leading
-                organizations. These collaborations help us expand our reach, enhance our curriculum, and connect our
-                community with opportunities.
+               {aboutData.acf.partners_collaborations.partners_collaborations_description}
               </p>
 
               <div className="space-y-6 mt-8">
@@ -771,8 +741,8 @@ export default function AboutPage() {
                     <Building className="h-7 w-7 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">Educational Partners</h3>
-                    <p className="text-gray-600">Leading universities and training institutions</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{aboutData.acf.partners_collaborations.point_1_title}</h3>
+                    <p className="text-gray-600">{aboutData.acf.partners_collaborations.point_1_description}</p>
                   </div>
                 </motion.div>
 
@@ -787,8 +757,8 @@ export default function AboutPage() {
                     <HandshakeIcon className="h-7 w-7 text-teal-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">Industry Associations</h3>
-                    <p className="text-gray-600">Professional bodies and trade organizations</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{aboutData.acf.partners_collaborations.point_2_title}</h3>
+                    <p className="text-gray-600">{aboutData.acf.partners_collaborations.point_2_description}</p>
                   </div>
                 </motion.div>
 
@@ -803,8 +773,8 @@ export default function AboutPage() {
                     <Globe className="h-7 w-7 text-purple-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">Global Network</h3>
-                    <p className="text-gray-600">International recruitment and bidding firms</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{aboutData.acf.partners_collaborations.point_3_title}</h3>
+                    <p className="text-gray-600">{aboutData.acf.partners_collaborations.point_3_description}</p>
                   </div>
                 </motion.div>
               </div>
@@ -839,7 +809,7 @@ export default function AboutPage() {
               className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-4"
             >
               <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-              <span className="text-white font-medium text-sm">Join Our Team</span>
+              <span className="text-white font-medium text-sm">{aboutData.acf.join_our_mission.join_our_mission_batch}</span>
             </motion.div>
 
             <motion.h2
@@ -849,7 +819,7 @@ export default function AboutPage() {
               }}
               className="text-4xl font-bold text-white mb-6"
             >
-              Join Our Mission
+              {aboutData.acf.join_our_mission.join_our_mission_title}
             </motion.h2>
 
             <motion.p
@@ -859,8 +829,7 @@ export default function AboutPage() {
               }}
               className="text-white/90 text-lg"
             >
-              SnB Alliance is always looking for passionate professionals who share our vision of elevating the
-              bidding and recruitment industries.
+              {aboutData.acf.join_our_mission.join_our_mission_description}
             </motion.p>
           </div>
 
@@ -889,26 +858,12 @@ export default function AboutPage() {
                   </div>
 
                   <div className="flex-grow space-y-4">
-                    <h3 className="text-2xl font-bold text-white">Why Work With Us?</h3>
+                    <h3 className="text-2xl font-bold text-white">{aboutData.acf.join_our_mission.work_with_us_heading}</h3>
                     <ul className="space-y-3 text-white/90">
                       <li className="flex items-start gap-2">
-                        <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mt-1 flex-shrink-0">
-                          <span className="w-2 h-2 rounded-full bg-white"></span>
-                        </span>
-                        <span>Meaningful Impact: Be part of a team dedicated to empowering individuals and businesses.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mt-1 flex-shrink-0">
-                          <span className="w-2 h-2 rounded-full bg-white"></span>
-                        </span>
-                        <span>Collaborative Culture: Work alongside thought leaders and industry experts.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mt-1 flex-shrink-0">
-                          <span className="w-2 h-2 rounded-full bg-white"></span>
-                        </span>
-                        <span>Professional Growth: Access to ongoing training and certification opportunities.</span>
-                      </li>
+                        <div dangerouslySetInnerHTML={{ __html: aboutData.acf.join_our_mission.work_with_us_point_1}} />
+                        </li>
+                     
                     </ul>
                   </div>
                 </div>
@@ -930,26 +885,11 @@ export default function AboutPage() {
                   </div>
 
                   <div className="flex-grow space-y-4">
-                    <h3 className="text-2xl font-bold text-white">Current Openings</h3>
+                    <h3 className="text-2xl font-bold text-white">{aboutData.acf.join_our_mission.current_openings_heading}</h3>
                     <ul className="space-y-3 text-white/90">
                       <li className="flex items-start gap-2">
-                        <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mt-1 flex-shrink-0">
-                          <span className="w-2 h-2 rounded-full bg-white"></span>
-                        </span>
-                        <span>Program Coordinator: Assist in the development and management of our certification programs.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mt-1 flex-shrink-0">
-                          <span className="w-2 h-2 rounded-full bg-white"></span>
-                        </span>
-                        <span>Marketing Specialist: Help promote our offerings and engage the community.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mt-1 flex-shrink-0">
-                          <span className="w-2 h-2 rounded-full bg-white"></span>
-                        </span>
-                        <span>Instructional Designer: Create and refine learning materials for both online and in-person training.</span>
-                      </li>
+                        <div dangerouslySetInnerHTML={{ __html: aboutData.acf.join_our_mission.current_openings_points }} />
+                        </li>
                     </ul>
                   </div>
                 </div>
@@ -971,10 +911,9 @@ export default function AboutPage() {
                   </div>
 
                   <div className="flex-grow space-y-4">
-                    <h3 className="text-2xl font-bold text-white">How to Apply</h3>
+                    <h3 className="text-2xl font-bold text-white">{aboutData.acf.join_our_mission.how_to_apply_heading}</h3>
                     <p className="text-white/90">
-                      Send your resume and a brief cover letter detailing your interest in SnB Alliance to
-                      careers@snballiance.org. If we think you're a good fit, we'll reach out to schedule an interview.
+                    {aboutData.acf.join_our_mission.how_to_apply_description}
                     </p>
                     <div className="pt-4">
                       <motion.a
@@ -1020,7 +959,7 @@ export default function AboutPage() {
               className="inline-flex items-center gap-2 bg-[#9c242a]/10 px-4 py-2 rounded-full mb-4"
             >
               <span className="w-2 h-2 rounded-full bg-[#9c242a] animate-pulse"></span>
-              <span className="text-[#9c242a] font-medium text-sm tracking-wide uppercase">Stay Updated</span>
+              <span className="text-[#9c242a] font-medium text-sm tracking-wide uppercase">{aboutData.acf.news_announcements.news_batch}</span>
             </motion.div>
 
             <motion.h2
@@ -1030,7 +969,7 @@ export default function AboutPage() {
               }}
               className="text-4xl font-bold text-[#9c242a] mb-6 relative"
             >
-              News & Announcements
+           {aboutData.acf.news_announcements.news_title}
               <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#057e8d] to-[#ed8523]"></div>
             </motion.h2>
 
@@ -1041,8 +980,7 @@ export default function AboutPage() {
               }}
               className="text-gray-600 text-lg mt-8"
             >
-              Keep track of our latest initiatives, partnerships, and program launches. Whether you're a member, future
-              candidate, or industry partner, our updates will ensure you're always in the loop.
+             {aboutData.acf.news_announcements.news_description}
             </motion.p>
           </div>
 
@@ -1105,15 +1043,6 @@ export default function AboutPage() {
             }}
             className="flex justify-center mt-16"
           >
-            <motion.a
-              href="/news"
-              className="relative overflow-hidden group bg-[#057e8d] hover:bg-[#057e8d]/90 text-white font-bold px-10 py-4 text-lg rounded-xl shadow-lg inline-flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <span className="relative z-10">View All News</span>
-              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-            </motion.a>
           </motion.div>
         </div>
       </motion.section>
@@ -1141,7 +1070,7 @@ export default function AboutPage() {
               className="inline-flex items-center gap-2 bg-[#ed8523]/10 px-4 py-2 rounded-full mb-4"
             >
               <span className="w-2 h-2 rounded-full bg-[#ed8523] animate-pulse"></span>
-              <span className="text-[#ed8523] font-medium text-sm tracking-wide uppercase">Contact Us</span>
+              <span className="text-[#ed8523] font-medium text-sm tracking-wide uppercase">{aboutData.acf.get_in_touch.get_in_touch_batch}</span>
             </motion.div>
 
             <motion.h2
@@ -1151,7 +1080,7 @@ export default function AboutPage() {
               }}
               className="text-4xl font-bold text-[#9c242a] mb-6 relative"
             >
-              Get in Touch
+             {aboutData.acf.get_in_touch.get_in_touch_heading}
               <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#057e8d] to-[#ed8523]"></div>
             </motion.h2>
           </div>
@@ -1179,8 +1108,8 @@ export default function AboutPage() {
                 <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Mail className="h-8 w-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Email</h3>
-                <p className="text-gray-600 mb-4">info@snballiance.org</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{aboutData.acf.get_in_touch.email_heading}</h3>
+                <p className="text-gray-600 mb-4">{aboutData.acf.get_in_touch.email}</p>
                 <motion.a
                   href="mailto:info@snballiance.org"
                   className="mt-auto inline-flex items-center px-6 py-2 bg-[#057e8d] text-white font-medium rounded-xl hover:bg-[#057e8d]/90 transition-colors shadow-md"
@@ -1205,11 +1134,9 @@ export default function AboutPage() {
                 <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <MapPin className="h-8 w-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Location</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{aboutData.acf.get_in_touch.location_heading}</h3>
                 <p className="text-gray-600 mb-4 text-center">
-                  PO Box 40033 Derry Heights<br />
-                  Milton, ON L9T 7W4<br />
-                  Canada
+                {aboutData.acf.get_in_touch.location}
                 </p>
                 <motion.a
                   href="/contact"

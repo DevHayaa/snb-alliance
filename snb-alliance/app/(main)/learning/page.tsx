@@ -38,13 +38,6 @@ export default function LearningPage() {
   const [learningData, setLearningData] = useState<LearningData | null>(null)
   const { language } = useLanguage()
 
-  // Brand colors
-  const brandColors = {
-    teal: "#057e8d",
-    red: "#9c242a",
-    orange: "#ed8523",
-  }
-
   // Animation variants
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },

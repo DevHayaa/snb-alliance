@@ -11,7 +11,7 @@ export default function CSBACertificationPage() {
         <div className="flex justify-center items-center mb-4">
         <img src="/csba.png" alt="CBMP Logo" className="h-30 w-40 mr-4" />
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            Certificate In Staffing & Bidding Associates (CSBA)
+            Certified Staffing & Bidding Associates (CSBA)
           </h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
