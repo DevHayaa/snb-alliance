@@ -166,7 +166,7 @@ export default function HomePage() {
         initial="hidden"
         animate={heroInView ? "visible" : "hidden"}
         variants={fadeIn}
-        className="relative w-full overflow-hidden min-h-[90vh] flex items-center"
+        className="relative w-full overflow-hidden min-h-[60vh] flex items-center"
       >
         {homeData.acf.hero_bg_image && (
           <div
@@ -314,7 +314,7 @@ export default function HomePage() {
           ></motion.div>
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 py-16 md:py-24">
+        <div className="relative z-10 container mx-auto px-4 py-16 md:py-16">
           <div className="max-w-5xl mx-auto">
             <motion.div
               variants={{
@@ -336,7 +336,7 @@ export default function HomePage() {
                   hidden: { opacity: 0, y: 30 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
                 }}
-                className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight"
+                className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
                 dangerouslySetInnerHTML={{ __html: homeData?.acf?.hero_title || "" }}
               ></motion.h1>
 
@@ -449,29 +449,6 @@ export default function HomePage() {
               <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
                 <p className="text-xl leading-relaxed">{homeData.acf.snb_alliance_paragraph}</p>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
-                <div className="flex flex-col gap-3 p-5 rounded-xl bg-gradient-to-br from-[#057e8d]/5 to-transparent hover:from-[#057e8d]/10 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-lg bg-[#057e8d]/10 flex items-center justify-center">
-                    <Check className="w-6 h-6 text-[#057e8d]" />
-                  </div>
-                  <p className="font-semibold text-gray-800">Industry Recognized</p>
-                </div>
-
-                <div className="flex flex-col gap-3 p-5 rounded-xl bg-gradient-to-br from-[#ed8523]/5 to-transparent hover:from-[#ed8523]/10 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-lg bg-[#ed8523]/10 flex items-center justify-center">
-                    <Users className="w-6 h-6 text-[#ed8523]" />
-                  </div>
-                  <p className="font-semibold text-gray-800">Expert Instructors</p>
-                </div>
-
-                <div className="flex flex-col gap-3 p-5 rounded-xl bg-gradient-to-br from-[#9c242a]/5 to-transparent hover:from-[#9c242a]/10 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-lg bg-[#9c242a]/10 flex items-center justify-center">
-                    <Award className="w-6 h-6 text-[#9c242a]" />
-                  </div>
-                  <p className="font-semibold text-gray-800">Global Community</p>
-                </div>
-              </div>
             </motion.div>
 
             <motion.div className="relative md:col-span-7 order-1 md:order-2" variants={slideInRight}>
@@ -579,37 +556,31 @@ export default function HomePage() {
             {[
               {
                 icon: <Check className="h-6 w-6 text-[#057e8d]" />,
-                title: "Industry Recognition",
                 description: homeData.acf.benifit_1,
                 color: "from-[#057e8d]/10 to-[#057e8d]/5",
               },
               {
                 icon: <Check className="h-6 w-6 text-[#ed8523]" />,
-                title: "Expert Instructors",
                 description: homeData.acf.benifit_2,
                 color: "from-[#ed8523]/10 to-[#ed8523]/5",
               },
               {
                 icon: <Check className="h-6 w-6 text-[#9c242a]" />,
-                title: "Flexible Learning",
                 description: homeData.acf.benifit_3,
                 color: "from-[#9c242a]/10 to-[#9c242a]/5",
               },
               {
                 icon: <Check className="h-6 w-6 text-[#057e8d]" />,
-                title: "Practical Skills",
                 description: homeData.acf.benifit_4,
                 color: "from-[#057e8d]/10 to-[#057e8d]/5",
               },
               {
                 icon: <Check className="h-6 w-6 text-[#ed8523]" />,
-                title: "Global Community",
                 description: homeData.acf.benifit_5,
                 color: "from-[#ed8523]/10 to-[#ed8523]/5",
               },
               {
                 icon: <Check className="h-6 w-6 text-[#9c242a]" />,
-                title: "Ongoing Support",
                 description: "Access to mentorship and resources even after certification.",
                 color: "from-[#9c242a]/10 to-[#9c242a]/5",
               },
@@ -624,15 +595,14 @@ export default function HomePage() {
                   y: -10,
                   transition: { duration: 0.2 },
                 }}
-                className="bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group border border-gray-100 shadow-md"
+                className="flex bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group border border-gray-100 shadow-md"
               >
                 <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${benefit.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  className={`w-24 h-12 rounded-xl bg-gradient-to-br flex ${benefit.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
                 >
                   {benefit.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
+                <p className="text-gray-600 mx-2">{benefit.description}</p>
               </motion.div>
             ))}
           </motion.div>

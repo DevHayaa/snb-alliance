@@ -173,7 +173,7 @@ export default function ContactPage() {
                 hidden: { opacity: 0, y: 30 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
               }}
-              className="text-4xl md:text-5xl font-bold text-[#f8a02e] mb-6"
+              className="text-4xl md:text-5xl font-bold text-white mb-6"
             >
               Contact Us
             </motion.h1>

@@ -225,7 +225,7 @@ export default function MembershipPage() {
               }}
             >
               <Link
-                href="#join"
+                href="/register"
                 className="relative overflow-hidden group bg-[#f0932a] hover:bg-[#f0932a]/90 text-white font-bold px-8 py-4 text-lg rounded-xl shadow-lg inline-flex items-center justify-center gap-2"
               >
                 <span className="relative z-10">Be A Member</span>
@@ -968,6 +968,7 @@ export default function MembershipPage() {
       <motion.section
         ref={testimonialsRef}
         initial="hidden"
+        id="stories"
         animate={testimonialsInView ? "visible" : "hidden"}
         variants={fadeIn}
         className="py-16 bg-white relative overflow-hidden"

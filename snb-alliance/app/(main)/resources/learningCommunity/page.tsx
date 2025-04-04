@@ -18,12 +18,23 @@ import {
   Lightbulb,
   Share2,
   FileText,
+  Sparkles,
 } from "lucide-react"
 
-// Animation variants
+// Animation variants - enhanced
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+}
+
+const slideInLeft = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, type: "spring", stiffness: 100 } },
+}
+
+const slideInRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, type: "spring", stiffness: 100 } },
 }
 
 const staggerContainer = {
@@ -36,6 +47,15 @@ const staggerContainer = {
   },
 }
 
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, type: "spring", stiffness: 100 },
+  },
+}
+
 // Section Card Component
 function SectionCard({
   number,
@@ -45,7 +65,7 @@ function SectionCard({
   items,
   ctaText,
   ctaLink,
-  accentColor = "border-[#39a3b1]",
+  accentColor = "border-[#0c6978]",
   bgColor = "bg-white",
 }: {
   number: number
@@ -59,16 +79,20 @@ function SectionCard({
   bgColor?: string
 }) {
   return (
-    <motion.div variants={fadeIn} className={`rounded-xl border ${accentColor} shadow-md overflow-hidden ${bgColor}`}>
+    <motion.div
+      variants={fadeIn}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className={`rounded-xl border ${accentColor} shadow-md overflow-hidden ${bgColor} hover:shadow-lg transition-all duration-300`}
+    >
       <div className="p-6 md:p-8">
         <div className="flex items-start gap-4 mb-6">
-          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#39a3b1] to-[#39a3b1]/70 text-white font-bold text-xl shadow-md">
+          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#0c6978] to-[#0c6978]/70 text-white font-bold text-xl shadow-md">
             {number}
           </div>
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Icon className="h-6 w-6 text-[#39a3b1]" />
-              <h3 className="text-2xl font-bold">{title}</h3>
+              <Icon className="h-6 w-6 text-[#0c6978]" />
+              <h3 className="text-2xl font-bold text-gray-800">{title}</h3>
             </div>
             <p className="text-gray-600">{description}</p>
           </div>
@@ -77,21 +101,23 @@ function SectionCard({
         <div className="space-y-4 mb-6">
           {items.map((item, index) => (
             <div key={index} className="flex items-start gap-3">
-              <div className="mt-1 text-[#39a3b1]">
+              <div className="mt-1 text-[#0c6978]">
                 {item.icon === "check" && <CheckCircle className="h-5 w-5" />}
-                {item.icon === "dot" && <div className="w-2 h-2 rounded-full bg-[#39a3b1] mt-2"></div>}
+                {item.icon === "dot" && <div className="w-2 h-2 rounded-full bg-[#0c6978] mt-2"></div>}
               </div>
               <p className="text-gray-700">{item.text}</p>
             </div>
           ))}
         </div>
 
-        <Link
-          href={ctaLink}
-          className="inline-flex items-center px-5 py-2.5 bg-[#39a3b1] hover:bg-[#39a3b1]/90 text-white rounded-md transition-colors font-medium"
-        >
-          {ctaText} <ArrowRight className="ml-2 h-4 w-4" />
-        </Link>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Link
+            href={ctaLink}
+            className="inline-flex items-center px-5 py-2.5 bg-[#0c6978] hover:bg-[#084955] text-white rounded-md transition-colors font-medium shadow-md hover:shadow-lg"
+          >
+            {ctaText} <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </motion.div>
       </div>
     </motion.div>
   )
@@ -111,10 +137,10 @@ function EventCard({ title, date, type, icon: Icon }: { title: string; date: str
             <Clock className="h-3 w-3 mr-1" /> {date}
           </span>
         </div>
-        <h4 className="font-medium group-hover:text-[#39a3b1] transition-colors">{title}</h4>
+        <h4 className="font-medium group-hover:text-[#0c6978] transition-colors">{title}</h4>
       </div>
       <div className="self-center opacity-0 group-hover:opacity-100 transition-opacity">
-        <ChevronRight className="h-4 w-4 text-[#39a3b1]" />
+        <ChevronRight className="h-4 w-4 text-[#0c6978]" />
       </div>
     </div>
   )
@@ -128,70 +154,124 @@ function ForumTopicCard({
   icon: Icon,
 }: { title: string; description: string; count: number; icon: any }) {
   return (
-    <div className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow group">
+    <motion.div
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-all duration-300 group"
+    >
       <div className="flex items-start gap-3 mb-3">
-        <div className="p-2 rounded-full bg-[#39a3b1]/10 text-[#39a3b1] group-hover:bg-[#39a3b1]/20 transition-colors">
+        <div className="p-2 rounded-full bg-[#0c6978]/10 text-[#0c6978] group-hover:bg-[#0c6978]/20 transition-colors">
           <Icon className="h-5 w-5" />
         </div>
-        <h4 className="font-bold group-hover:text-[#39a3b1] transition-colors">{title}</h4>
+        <h4 className="font-bold group-hover:text-[#0c6978] transition-colors">{title}</h4>
       </div>
       <p className="text-sm text-gray-600 mb-3">{description}</p>
       <div className="flex justify-between items-center text-sm">
         <span className="text-gray-500">{count} discussions</span>
-        <span className="text-[#39a3b1] font-medium group-hover:underline flex items-center">
+        <span className="text-[#0c6978] font-medium group-hover:underline flex items-center">
           Join <ArrowRight className="ml-1 h-3 w-3" />
         </span>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
 // Benefit Card Component
 function BenefitCard({ icon: Icon, title, description }: { icon: any; title: string; description: string }) {
   return (
-    <div className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-[#39a3b1]/30 transition-colors">
-      <div className="p-2 rounded-full bg-[#39a3b1]/10 text-[#39a3b1]">
+    <motion.div
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-[#0c6978]/30 hover:shadow-md transition-all duration-300"
+    >
+      <div className="p-2 rounded-full bg-[#0c6978]/10 text-[#0c6978]">
         <Icon className="h-5 w-5" />
       </div>
       <div>
-        <h4 className="font-bold mb-1">{title}</h4>
+        <h4 className="font-bold mb-1 text-gray-800">{title}</h4>
         <p className="text-sm text-gray-600">{description}</p>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
 export default function LearningCommunityPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
+      {/* Hero Section - Enhanced with animations and teal color */}
       <section
         id="hero"
-        className="relative py-16 md:py-24 flex items-center justify-center text-center bg-cover bg-center"
-        style={{ backgroundImage: "url('/homeBanner.png')" }}
-        >
-        <div className=" text-center mx-auto px-4 relative z-10">
-            <motion.div initial="hidden" animate="visible" variants={fadeIn} className="max-w-3xl text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center text-[#f8a02e]">Learning & Community</h1>
-            <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-center">
-                Connect, Learn & Grow with Industry Experts
-            </h2>
-            <p className="text-xl mb-8 text-white/90 text-center">
-                SnB Alliance is more than just a platform—it's a thriving community where professionals learn,
-                collaborate, and share insights. Whether you're looking for expert articles, industry FAQs, networking
-                opportunities, or live discussions, you'll find everything you need to stay ahead in the bidding and
-                recruitment industry.
-            </p>
-            <Link
-                href="/membership"
-                className="inline-flex items-center mx-auto px-6 py-3 bg-[#f0932a] text-white font-medium rounded-md hover:bg-[#f0932a]/90 transition-colors shadow-lg"
-            >
-                <Users className="mr-2 h-5 w-5" /> Join the conversation today! Become a Member
-            </Link>
-            </motion.div>
+        className="relative py-20 flex items-center justify-center text-center bg-gradient-to-br from-[#0c6978] to-[#084955] overflow-hidden"
+      >
+        {/* Decorative elements */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.15]"></div>
         </div>
-        </section>
 
+        {/* Animated shapes */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.2 }}
+          className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[#0c6978] blur-3xl"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.15 }}
+          className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-[#0c6978] blur-3xl"
+        />
+
+        {/* Floating elements */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: [0, -10, 0], opacity: 0.7 }}
+          transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+          className="absolute top-1/4 right-1/4 text-white/20"
+        >
+          <BookOpen className="w-16 h-16" />
+        </motion.div>
+
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: [0, 10, 0], opacity: 0.5 }}
+          transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse", delay: 1 }}
+          className="absolute bottom-1/3 left-1/5 text-white/20"
+        >
+          <MessageSquare className="w-12 h-12" />
+        </motion.div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div initial="hidden" animate="visible" variants={fadeIn} className="max-w-3xl mx-auto text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
+            >
+              <Sparkles className="w-4 h-4 text-white" />
+              <span className="text-white font-medium">Knowledge Sharing</span>
+            </motion.div>
+
+            <motion.h1 variants={scaleIn} className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Learning & Community
+            </motion.h1>
+            <motion.h2 variants={fadeIn} className="text-2xl md:text-3xl font-semibold mb-4">
+              Connect, Learn & Grow with Industry Experts
+            </motion.h2>
+            <motion.p variants={fadeIn} className="text-xl mb-8 text-white/90">
+              SnB Alliance is more than just a platform—it's a thriving community where professionals learn,
+              collaborate, and share insights. Whether you're looking for expert articles, industry FAQs, networking
+              opportunities, or live discussions, you'll find everything you need to stay ahead in the bidding and
+              recruitment industry.
+            </motion.p>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                href="/membership"
+                className="inline-flex items-center px-6 py-3 bg-[#f0932a] text-white font-medium rounded-lg hover:bg-[#f0932a]/90 transition-colors shadow-lg"
+              >
+                <Users className="mr-2 h-5 w-5" /> Join the conversation today! Become a Member
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Main Content Sections */}
       <section id="main-content" className="py-16">
@@ -217,7 +297,7 @@ export default function LearningCommunityPage() {
                 ]}
                 ctaText="Read the Blog"
                 ctaLink="/resources/blog"
-                accentColor="border-l-4 border-[#39a3b1] border-t border-r border-b"
+                accentColor="border-l-4 border-[#0c6978] border-t border-r border-b"
               />
             </div>
 
@@ -264,7 +344,7 @@ export default function LearningCommunityPage() {
                 ]}
                 ctaText="Join the Community"
                 ctaLink="https://www.linkedin.com"
-                accentColor="border-l-4 border-[#39a3b1] border-t border-r border-b"
+                accentColor="border-l-4 border-[#0c6978] border-t border-r border-b"
               />
             </div>
 
@@ -272,7 +352,8 @@ export default function LearningCommunityPage() {
             <motion.div
               id="upcoming-events"
               variants={fadeIn}
-              className="rounded-xl border border-[#f0932a] border-l-4 shadow-md overflow-hidden bg-white"
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="rounded-xl border border-[#f0932a] border-l-4 shadow-md overflow-hidden bg-white hover:shadow-lg transition-all duration-300"
             >
               <div className="p-6 md:p-8">
                 <div className="flex items-start gap-4 mb-6">
@@ -282,7 +363,7 @@ export default function LearningCommunityPage() {
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <Calendar className="h-6 w-6 text-[#f0932a]" />
-                      <h3 className="text-2xl font-bold">Upcoming Events</h3>
+                      <h3 className="text-2xl font-bold text-gray-800">Upcoming Events</h3>
                     </div>
                     <p className="text-gray-600">Stay Updated on Webinars, Training, & Industry Meetups</p>
                   </div>
@@ -309,12 +390,14 @@ export default function LearningCommunityPage() {
                   />
                 </div>
 
-                <Link
-                  href="/learning/events&Calendar"
-                  className="inline-flex items-center px-5 py-2.5 bg-[#f0932a] hover:bg-[#f0932a]/90 text-white rounded-md transition-colors font-medium"
-                >
-                  View Upcoming Events <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    href="/learning/events&Calendar"
+                    className="inline-flex items-center px-5 py-2.5 bg-[#f0932a] hover:bg-[#f0932a]/90 text-white rounded-md transition-colors font-medium shadow-md hover:shadow-lg"
+                  >
+                    View Upcoming Events <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -322,17 +405,18 @@ export default function LearningCommunityPage() {
             <motion.div
               id="discussion-forums"
               variants={fadeIn}
-              className="rounded-xl border border-[#39a3b1] border-l-4 shadow-md overflow-hidden bg-white"
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="rounded-xl border border-[#0c6978] border-l-4 shadow-md overflow-hidden bg-white hover:shadow-lg transition-all duration-300"
             >
               <div className="p-6 md:p-8">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#39a3b1] to-[#39a3b1]/70 text-white font-bold text-xl shadow-md">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#0c6978] to-[#0c6978]/70 text-white font-bold text-xl shadow-md">
                     5
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <MessageSquare className="h-6 w-6 text-[#39a3b1]" />
-                      <h3 className="text-2xl font-bold">Discussion Forums</h3>
+                      <MessageSquare className="h-6 w-6 text-[#0c6978]" />
+                      <h3 className="text-2xl font-bold text-gray-800">Discussion Forums</h3>
                     </div>
                     <p className="text-gray-600">Engage in Meaningful Conversations & Knowledge Sharing</p>
                   </div>
@@ -359,23 +443,25 @@ export default function LearningCommunityPage() {
                   />
                 </div>
 
-                <Link
-                  href="https://www.linkedin.com"
-                  className="inline-flex items-center px-5 py-2.5 bg-[#39a3b1] hover:bg-[#39a3b1]/90 text-white rounded-md transition-colors font-medium"
-                >
-                  Enter the Forum <ExternalLink className="ml-2 h-4 w-4" />
-                </Link>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    href="https://www.linkedin.com"
+                    className="inline-flex items-center px-5 py-2.5 bg-[#0c6978] hover:bg-[#084955] text-white rounded-md transition-colors font-medium shadow-md hover:shadow-lg"
+                  >
+                    Enter the Forum <ExternalLink className="ml-2 h-4 w-4" />
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Why Join Section */}
-      <section id="why-join" className="py-16 bg-gradient-to-br from-[#39a3b1]/10 to-white">
+      {/* Why Join Section - Enhanced with animations and teal color */}
+      <section id="why-join" className="py-16 bg-gradient-to-br from-[#0c6978]/10 to-white">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" animate="visible" variants={fadeIn} className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Why Join the SnB Alliance Community?</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">Why Join the SnB Alliance Community?</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Connect with like-minded professionals, access exclusive resources, and accelerate your career growth.
             </p>
@@ -418,12 +504,14 @@ export default function LearningCommunityPage() {
           </motion.div>
 
           <motion.div initial="hidden" animate="visible" variants={fadeIn} className="text-center">
-            <Link
-              href="https://www.linkedin.com"
-              className="inline-flex items-center px-8 py-4 bg-[#39a3b1] text-white font-medium rounded-md hover:bg-[#39a3b1]/90 transition-colors shadow-lg text-lg"
-            >
-              <Users className="mr-2 h-5 w-5" /> Be part of a thriving professional network! Join Now
-            </Link>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                href="https://www.linkedin.com"
+                className="inline-flex items-center px-8 py-4 bg-[#0c6978] text-white font-medium rounded-lg hover:bg-[#084955] transition-colors shadow-lg text-lg"
+              >
+                <Users className="mr-2 h-5 w-5" /> Be part of a thriving professional network! Join Now
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>

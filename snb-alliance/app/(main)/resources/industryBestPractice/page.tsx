@@ -199,7 +199,7 @@ export default function IndustryBestPracticesPage() {
                 hidden: { opacity: 0, y: 30 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
               }}
-              className="text-4xl md:text-6xl font-bold mb-6 tracking-tight text-[#f8a02e]"
+              className="text-4xl md:text-6xl font-bold mb-6 tracking-tight text-white"
             >
               Industry & Best Practices
             </motion.h1>

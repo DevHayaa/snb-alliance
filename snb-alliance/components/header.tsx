@@ -136,7 +136,7 @@ const navItems = [
       {
         title: "Success Stories",
         description: "Hear from our certified professionals",
-        href: "/learning#testimonials",
+        href: "/membership#stories",
         icon: "Star",
       },
       {
@@ -315,7 +315,7 @@ const megaMenuContent = {
         href: "/resources/certification",
         items: [
           { title: "Certification FAQ", href: "/resources#certification-faq", icon: "HelpCircle" },
-          { title: "Success Stories", href: "/learning#testimonials", icon: "Star" },
+          { title: "Success Stories", href: "/membership#stories", icon: "Star" },
         ],
       },
     ],

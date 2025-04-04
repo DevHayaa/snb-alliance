@@ -1,34 +1,33 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { AuthProvider } from "@/contexts/auth-context"
-import { LanguageProvider } from "@/contexts/LanguageContext"
+// import type React from "react";
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google"; // Import Poppins font
+import "./globals.css";
+import { AuthProvider } from "@/contexts/auth-context";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
+// Define Poppins font with subsets & weights
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"], // Add desired font weights
+  variable: "--font-poppins", // Store it in a CSS variable
+});
 
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "SnB Alliance - Empowering Professionals in Bidding & Recruitment",
   description: "Professional certifications and learning paths for bidding and recruitment specialists.",
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
-  // Get the current pathname to determine if we should show header/footer
-  const isAuthOrDashboardPage = (pathname: string) => {
-    return pathname.startsWith("/login") || pathname.startsWith("/register") || pathname.startsWith("/dashboard")
-  }
-
   return (
     <LanguageProvider>
-      <html lang="en">
-        <body className={inter.className}>
+      <html lang="en" className={poppins.variable}>
+        <body>
           <AuthProvider>
-            {/* We'll handle the header and footer in each specific layout */}
             <main className="min-h-screen">{children}</main>
           </AuthProvider>
         </body>
@@ -36,6 +35,3 @@ export default function RootLayout({
     </LanguageProvider>
   );
 }
-
-
-
