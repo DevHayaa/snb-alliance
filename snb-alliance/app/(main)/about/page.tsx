@@ -152,6 +152,14 @@ export default function AboutPage() {
     }
     fetchData()
   }, [language])
+  useEffect(() => {
+    if (aboutData && window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [aboutData]);
 
   if (!aboutData) {
     return (
